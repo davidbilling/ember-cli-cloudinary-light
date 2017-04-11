@@ -1,10 +1,9 @@
 import Ember from 'ember';
-import layout from '../templates/components/cloudinary-video';
+import formatter from '../utils/variable-formatter';
 
 const CloudinaryVideoComponent = Ember.Component.extend({
-  layout: layout,
   tagName: 'source',
-  attributeBindings: ['src', 'width', 'height'],
+  attributeBindings: ['src'],
 
   didInsertElement () {
     this._super(...arguments);
@@ -12,7 +11,9 @@ const CloudinaryVideoComponent = Ember.Component.extend({
 
     this._resizeHandler = function() {
       Ember.run.scheduleOnce('afterRender', this, ()=> {
-        _this.set('width', Ember.$('.grid__item').width());
+        if(_this.get('width')){
+          _this.set('width', Ember.$('.grid__item').width());
+        }
       });
     }.bind(this);
     Ember.$(window).on('resize', this._resizeHandler);
@@ -30,42 +31,21 @@ const CloudinaryVideoComponent = Ember.Component.extend({
   quality: Ember.computed.alias('options.quality'),
   radius: Ember.computed.alias('options.radius'),
 
-  src: Ember.computed('publicId', 'width', 'height', 'crop', 'fetch_format', 'quality', function() {
+  src: Ember.computed('publicId', 'width', 'height', 'crop', 'fetch_format', 'quality', 'radius', function() {
     const cloudName = Ember.getOwner(this).resolveRegistration('config:environment').cloudinary.cloudName;
-    let variables = [];
-
+    
     //if matchWidth set to true then set to actual width
-    if(this.get('options.matchWidth') === true){
+    if(this.get('options') && this.get('options.matchWidth') === true){
       if (!this.get('width')) {
         return;
       }
       this.set('options.width', this.get('width'));
     }
 
-    if(this.get('height')){
-      variables.push('h_' + this.get('height'));
-    }
-    if(this.get('width')){
-      variables.push('w_' + this.get('width'));
-    }
-    if(this.get('crop')){
-      variables.push('c_' + this.get('crop'));
-    }
-    if(this.get('fetch_format')){
-      variables.push('f_' + this.get('fetch_format'));
-    }
-    if(this.get('quality')){
-      variables.push('q_' + this.get('quality'));
-    }
-    if(this.get('radius')){
-      variables.push('r_' + this.get('radius'));
-    }
-
-    const params = variables.join(",");
+    const params = formatter(this.get('options'));
     const publicId = this.get('publicId');
 
-    const cloudinaryVideoTag = `https://res.cloudinary.com/${cloudName}/video/upload/${params}/${publicId}`;
-//    const cloudinaryVideoTag = Ember.$.cloudinary.video(this.get('publicId'), this.get('options') );
+    const cloudinaryVideoTag = `https://res.cloudinary.com/${cloudName}/video/upload${params}/${publicId}`;
     return Ember.String.htmlSafe(cloudinaryVideoTag);
   }),
 });

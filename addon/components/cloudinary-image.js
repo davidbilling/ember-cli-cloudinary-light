@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import formatter from '../utils/variable-formatter';
 
 const CloudinaryImageComponent = Ember.Component.extend({
   tagName: 'img',
@@ -12,16 +13,11 @@ const CloudinaryImageComponent = Ember.Component.extend({
   default_image: Ember.computed.alias('options.default_image'),
 
   src: Ember.computed('publicId', 'width', 'height', 'crop', 'fetch_format', 'quality', 'default_image', function() {
-    const height = this.get('height');
-    const width = this.get('width');
-    const crop = this.get('crop');
-    const ff = this.get('fetch_format');
-    const quality = this.get('quality');
-    const default_img = this.get('default_image');
-    const publicId = this.get('publicId');
     const cloudName = Ember.getOwner(this).resolveRegistration('config:environment').cloudinary.cloudName;
+    const params = formatter(this.get('options'));
+    const publicId = this.get('publicId');
 
-    const image = `https://res.cloudinary.com/${cloudName}/image/upload/h_${height},w_${width},c_${crop},f_${ff},q_${quality},d_${default_img}/${publicId}`;
+    const image = `https://res.cloudinary.com/${cloudName}/image/upload${params}/${publicId}`;
     return Ember.String.htmlSafe(image);
   })
 });

@@ -5,21 +5,23 @@ moduleForComponent('cloudinary-image', 'Integration | Component | cloudinary ima
   integration: true
 });
 
-test('it renders', function(assert) {
+test('it renders image', function(assert) {
+  this.render(hbs`{{cloudinary-image 'test'}}`);
+  assert.equal(this.$('img').attr('src'), 'https://res.cloudinary.com/cloudinary-test/image/upload/test');
+});
 
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
+test('it renders an image with width and height options', function(assert) {
+  this.render(hbs`{{cloudinary-image 'test' (hash width=100 height=100)}}`);
 
-  this.render(hbs`{{cloudinary-image}}`);
+  assert.equal(this.$('img').attr('src'), 'https://res.cloudinary.com/cloudinary-test/image/upload/h_100,w_100/test');
+  assert.equal(this.$('img').attr('width'), 100);
+  assert.equal(this.$('img').attr('height'), 100);
+});
 
-  assert.equal(this.$().text().trim(), '');
+test('it renders an image with width and height options in url and attributes', function(assert) {
+  this.render(hbs`{{cloudinary-image 'test' (hash width=100 height=100 crop='fill')}}`);
 
-  // Template block usage:
-  this.render(hbs`
-    {{#cloudinary-image}}
-      template block text
-    {{/cloudinary-image}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$('img').attr('src'), 'https://res.cloudinary.com/cloudinary-test/image/upload/h_100,w_100,c_fill/test');
+  assert.equal(this.$('img').attr('width'), 100);
+  assert.equal(this.$('img').attr('height'), 100);
 });
