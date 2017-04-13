@@ -33,16 +33,17 @@ const CloudinaryVideoComponent = Ember.Component.extend({
 
   src: Ember.computed('publicId', 'width', 'height', 'crop', 'fetch_format', 'quality', 'radius', function() {
     const cloudName = Ember.getOwner(this).resolveRegistration('config:environment').cloudinary.cloudName;
-    
+    let options = this.get('options');
+
     //if matchWidth set to true then set to actual width
     if(this.get('options') && this.get('options.matchWidth') === true){
       if (!this.get('width')) {
         return;
       }
-      this.set('options.width', this.get('width'));
+      options.width = this.get('width');
     }
 
-    const params = formatter(this.get('options'));
+    const params = formatter(options);
     const publicId = this.get('publicId');
 
     const cloudinaryVideoTag = `https://res.cloudinary.com/${cloudName}/video/upload${params}/${publicId}`;
