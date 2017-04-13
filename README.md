@@ -30,6 +30,15 @@ Width and height attributes are set on the img tag as well as passed to cloudina
 {{cloudinary-image 'imageId' (hash width=100 height=100 dpr="2.0")}}
 ```
 
+### safe-cloudinary-url helper ###
+
+This helper can be used in styles when you want to have dynamic url:s to cloudinary. It will return "background-image: url(..)" ready to use in a style element.
+
+```javascript
+<div class="your_class" style={{safe-cloudinary-url 'image_id' width='auto' dpr='auto' }}>
+</div>
+```
+
 ### cloudinary-video ###
 
 This component will render &lt;source&gt;&lt;/source&gt; tags generated from a cloudinary video and options.
