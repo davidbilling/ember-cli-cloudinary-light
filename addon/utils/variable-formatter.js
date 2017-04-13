@@ -8,6 +8,9 @@ export default function variableFormatter(options) {
   if(options.height){
     variables.push('h_' + options.height);
   }
+  if(options.dpr){
+    variables.push('dpr_' + options.dpr);
+  }  
   if(options.width){
     variables.push('w_' + options.width);
   }

@@ -5,12 +5,12 @@ const CloudinaryImageComponent = Ember.Component.extend({
   tagName: 'img',
   attributeBindings: ['src', 'width', 'height'],
 
-  width: Ember.computed.alias('options.width'),
-  height: Ember.computed.alias('options.height'),
-  crop: Ember.computed.alias('options.crop'),
-  fetch_format: Ember.computed.alias('options.fetch_format'),
-  quality: Ember.computed.alias('options.quality'),
-  default_image: Ember.computed.alias('options.default_image'),
+  width: Ember.computed.oneWay('options.width'),
+  height: Ember.computed.oneWay('options.height'),
+  crop: Ember.computed.oneWay('options.crop'),
+  fetch_format: Ember.computed.oneWay('options.fetch_format'),
+  quality: Ember.computed.oneWay('options.quality'),
+  default_image: Ember.computed.oneWay('options.default_image'),
 
   src: Ember.computed('publicId', 'width', 'height', 'crop', 'fetch_format', 'quality', 'default_image', function() {
     const cloudName = Ember.getOwner(this).resolveRegistration('config:environment').cloudinary.cloudName;

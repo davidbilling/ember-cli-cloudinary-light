@@ -3,7 +3,7 @@ import formatter from '../utils/variable-formatter';
 
 const CloudinaryVideoComponent = Ember.Component.extend({
   tagName: 'source',
-  attributeBindings: ['src'],
+  attributeBindings: ['src', 'width', 'height'],
 
   didInsertElement () {
     this._super(...arguments);
@@ -11,7 +11,7 @@ const CloudinaryVideoComponent = Ember.Component.extend({
 
     this._resizeHandler = function() {
       Ember.run.scheduleOnce('afterRender', this, ()=> {
-        if(_this.get('width')){
+        if(Ember.$('.grid__item').width()){
           _this.set('width', Ember.$('.grid__item').width());
         }
       });
@@ -24,12 +24,12 @@ const CloudinaryVideoComponent = Ember.Component.extend({
     Ember.$(window).off('resize', this._resizeHandler);
   },
 
-  width: Ember.computed.alias('options.width'),
-  height: Ember.computed.alias('options.height'),
-  crop: Ember.computed.alias('options.crop'),
-  fetch_format: Ember.computed.alias('options.fetch_format'),
-  quality: Ember.computed.alias('options.quality'),
-  radius: Ember.computed.alias('options.radius'),
+  width: Ember.computed.oneWay('options.width'),
+  height: Ember.computed.oneWay('options.height'),
+  crop: Ember.computed.oneWay('options.crop'),
+  fetch_format: Ember.computed.oneWay('options.fetch_format'),
+  quality: Ember.computed.oneWay('options.quality'),
+  radius: Ember.computed.oneWay('options.radius'),
 
   src: Ember.computed('publicId', 'width', 'height', 'crop', 'fetch_format', 'quality', 'radius', function() {
     const cloudName = Ember.getOwner(this).resolveRegistration('config:environment').cloudinary.cloudName;
