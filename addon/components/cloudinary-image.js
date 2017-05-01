@@ -5,8 +5,18 @@ const CloudinaryImageComponent = Ember.Component.extend({
   tagName: 'img',
   attributeBindings: ['src', 'width', 'height'],
 
-  width: Ember.computed.oneWay('options.width'),
-  height: Ember.computed.oneWay('options.height'),
+  width: Ember.computed('options.width', 'options.crop', function(){
+    if(this.get('options.crop') === 'limit' || this.get('options.crop') === 'fit' || this.get('options.crop') === 'lfill'){
+      return null;
+    }
+    return this.get('options.width');
+  }),
+  height: Ember.computed('options.height', 'options.crop', function(){
+    if(this.get('options.crop') === 'limit' || this.get('options.crop') === 'fit' || this.get('options.crop') === 'lfill'){
+      return null;
+    }
+    return this.get('options.height');
+  }),
   crop: Ember.computed.oneWay('options.crop'),
   fetch_format: Ember.computed.oneWay('options.fetch_format'),
   quality: Ember.computed.oneWay('options.quality'),

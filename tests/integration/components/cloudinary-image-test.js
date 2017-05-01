@@ -25,3 +25,25 @@ test('it renders an image with width and height options in url and attributes', 
   assert.equal(this.$('img').attr('width'), 100);
   assert.equal(this.$('img').attr('height'), 100);
 });
+
+test('it renders an image WHITOUT width and height options attributes for crop= limit', function(assert) {
+  this.render(hbs`{{cloudinary-image 'test' (hash height=100 crop='limit')}}`);
+
+  assert.equal(this.$('img').attr('src'), 'https://res.cloudinary.com/cloudinary-test/image/upload/h_100,c_limit/test');
+  assert.equal(this.$('img').attr('width'), null);
+  assert.equal(this.$('img').attr('height'), null);
+});
+test('it renders an image WHITOUT width and height options attributes for crop= lfill', function(assert) {
+  this.render(hbs`{{cloudinary-image 'test' (hash height=100 crop='lfill')}}`);
+
+  assert.equal(this.$('img').attr('src'), 'https://res.cloudinary.com/cloudinary-test/image/upload/h_100,c_lfill/test');
+  assert.equal(this.$('img').attr('width'), null);
+  assert.equal(this.$('img').attr('height'), null);
+});
+test('it renders an image WHITOUT width and height options attributes for crop= fit', function(assert) {
+  this.render(hbs`{{cloudinary-image 'test' (hash width=100 height=100 crop='fit')}}`);
+
+  assert.equal(this.$('img').attr('src'), 'https://res.cloudinary.com/cloudinary-test/image/upload/h_100,w_100,c_fit/test');
+  assert.equal(this.$('img').attr('width'), null);
+  assert.equal(this.$('img').attr('height'), null);
+});
