@@ -1,4 +1,3 @@
-
 // import { safeCloudinaryUrl } from 'dummy/helpers/safe-cloudinary-url';
 // import { module, test } from 'qunit';
 

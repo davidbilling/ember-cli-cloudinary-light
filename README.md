@@ -60,7 +60,6 @@ There is an extra 'matchWidth' option that will resize the video to the width of
 * `git clone <repository-url>` this repository
 * `cd ember-cli-cloudinary-light`
 * `npm install`
-* `bower install`
 
 ## Running
 
