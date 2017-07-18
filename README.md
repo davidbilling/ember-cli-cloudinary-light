@@ -59,6 +59,24 @@ There is an extra 'matchWidth' option that will resize the video to the width of
 </video>
 ```
 
+### cloudinary-resource-list ###
+
+This component issues an API call to Cloudinary's [Client-side resource lists](http://cloudinary.com/documentation/image_transformations#client_side_resource_lists) and will make all Cloudinary resource items available under an `items` property.
+
+Usage example:
+
+```javascript
+  {{#cloudinary-resource-list 'my-cloudinary-tag' as |resourceList|}}
+    {{#each resourceList.items as |item|}}
+      {{cloudinary-image item.public_id (hash width=100)}}
+    {{/each}}
+  {{/cloudinary-resource-list}}
+```
+
+Optional: the list will be sorted by an `order` metadata property on the Cloudinary resource.
+
+Please see the Cloudinary API docs for all available properties of a resource item.
+
 * `git clone <repository-url>` this repository
 * `cd ember-cli-cloudinary-light`
 * `npm install`
@@ -79,4 +97,3 @@ There is an extra 'matchWidth' option that will resize the video to the width of
 * `ember build`
 
 For more information on using ember-cli, visit [https://ember-cli.com/](https://ember-cli.com/).
-
