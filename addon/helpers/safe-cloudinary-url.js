@@ -1,16 +1,17 @@
-import Ember from 'ember';
+import Ember from 'ember';  //So far Ember.Handlebars.Utils.escapeExpression is not a Module
+import Helper from '@ember/component/helper';
+import { getOwner } from "@ember/application"
+import { htmlSafe } from "@ember/string"
 import formatter from '../utils/variable-formatter';
 
-const { getOwner } = Ember;
-
-export default Ember.Helper.extend({
+export default Helper.extend({
   compute(params, hash) {
     const cloudName = getOwner(this).resolveRegistration('config:environment').cloudinary.cloudName;
     const publicId = Ember.Handlebars.Utils.escapeExpression(params[0]);
     const parameters = formatter(hash);
 
     if (publicId) {
-      return Ember.String.htmlSafe(`background-image: url('https://res.cloudinary.com/${cloudName}/image/upload${parameters}/${publicId}')`);
+      return htmlSafe(`background-image: url('https://res.cloudinary.com/${cloudName}/image/upload${parameters}/${publicId}')`);
     }
   }
 });

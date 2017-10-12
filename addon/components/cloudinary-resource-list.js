@@ -1,8 +1,9 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { getOwner } from "@ember/application";
 import layout from '../templates/components/cloudinary-resource-list';
 import request from 'ember-ajax/request';
 
-const CloudinaryResourceList = Ember.Component.extend({
+const CloudinaryResourceList = Component.extend({
   layout,
 
   init() {
@@ -16,7 +17,7 @@ const CloudinaryResourceList = Ember.Component.extend({
   },
 
   buildUrl() {
-    const cloudName = Ember.getOwner(this).resolveRegistration(
+    const cloudName = getOwner(this).resolveRegistration(
       'config:environment'
     ).cloudinary.cloudName;
     const tag = this.get('cloudinaryTag');
