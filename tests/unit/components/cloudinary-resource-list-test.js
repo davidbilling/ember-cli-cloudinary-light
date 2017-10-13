@@ -1,5 +1,5 @@
+import { A } from '@ember/array';
 import { moduleFor, test } from 'ember-qunit';
-import Ember from 'ember';
 
 const cloudName = 'test-cloud';
 
@@ -35,7 +35,7 @@ test('Response is sorted correctly', function(assert) {
   let component = this.subject();
 
   let response = {
-    resources: Ember.A([
+    resources: A([
       { publid_id: 1, context: { custom: { order: 3 } } },
       { publid_id: 2, context: { custom: { order: 2 } } },
       { publid_id: 3, context: { custom: { order: 1 } } }

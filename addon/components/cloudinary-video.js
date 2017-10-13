@@ -1,3 +1,4 @@
+import { oneWay } from '@ember/object/computed';
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 import { scheduleOnce } from "@ember/runloop";
@@ -29,12 +30,12 @@ const CloudinaryVideoComponent = Component.extend({
     $(window).off('resize', this._resizeHandler);
   },
 
-  width: computed.oneWay('options.width'),
-  height: computed.oneWay('options.height'),
-  crop: computed.oneWay('options.crop'),
-  fetch_format: computed.oneWay('options.fetch_format'),
-  quality: computed.oneWay('options.quality'),
-  radius: computed.oneWay('options.radius'),
+  width: oneWay('options.width'),
+  height: oneWay('options.height'),
+  crop: oneWay('options.crop'),
+  fetch_format: oneWay('options.fetch_format'),
+  quality: oneWay('options.quality'),
+  radius: oneWay('options.radius'),
 
   src: computed('publicId', 'width', 'height', 'crop', 'fetch_format', 'quality', 'radius', function() {
     const cloudName = getOwner(this).resolveRegistration('config:environment').cloudinary.cloudName;

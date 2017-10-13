@@ -1,3 +1,4 @@
+import { oneWay } from '@ember/object/computed';
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 import { getOwner } from "@ember/application";
@@ -20,10 +21,10 @@ const CloudinaryImageComponent = Component.extend({
     }
     return this.get('options.height');
   }),
-  crop: computed.oneWay('options.crop'),
-  fetch_format: computed.oneWay('options.fetch_format'),
-  quality: computed.oneWay('options.quality'),
-  default_image: computed.oneWay('options.default_image'),
+  crop: oneWay('options.crop'),
+  fetch_format: oneWay('options.fetch_format'),
+  quality: oneWay('options.quality'),
+  default_image: oneWay('options.default_image'),
 
   src: computed('publicId', 'width', 'height', 'crop', 'fetch_format', 'quality', 'default_image', function() {
     const cloudName = getOwner(this).resolveRegistration('config:environment').cloudinary.cloudName;
