@@ -1,11 +1,13 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('cloudinary-video', 'Integration | Component | cloudinary video', {
-  integration: true
-});
+module('Integration | Component | cloudinary video', function(hooks) {
+  setupRenderingTest(hooks);
 
-test('it renders a video', function(assert) {
-  this.render(hbs`{{cloudinary-video 'dog'}}`);
-  assert.equal(this.$('source').attr('src'), 'https://res.cloudinary.com/cloudinary-test/video/upload/dog');
+  test('it renders a video', async function(assert) {
+    await render(hbs`{{cloudinary-video 'dog'}}`);
+    assert.equal(this.$('source').attr('src'), 'https://res.cloudinary.com/cloudinary-test/video/upload/dog');
+  });
 });

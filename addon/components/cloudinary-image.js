@@ -9,13 +9,13 @@ const CloudinaryImageComponent = Component.extend({
   tagName: 'img',
   attributeBindings: ['src', 'width', 'height'],
 
-  width: computed('options.width', 'options.crop', function(){
+  width: computed('options.{width,crop}', function(){
     if(this.get('options.crop') === 'limit' || this.get('options.crop') === 'fit' || this.get('options.crop') === 'lfill'){
       return null;
     }
     return this.get('options.width');
   }),
-  height: computed('options.height', 'options.crop', function(){
+  height: computed('options.{height,crop}', function(){
     if(this.get('options.crop') === 'limit' || this.get('options.crop') === 'fit' || this.get('options.crop') === 'lfill'){
       return null;
     }
