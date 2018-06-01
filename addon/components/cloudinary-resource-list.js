@@ -2,6 +2,8 @@ import Component from '@ember/component';
 import { getOwner } from "@ember/application";
 import layout from '../templates/components/cloudinary-resource-list';
 import request from 'ember-ajax/request';
+import { get } from '@ember/object';
+import { set } from '@ember/object';
 
 const CloudinaryResourceList = Component.extend({
   layout,
@@ -9,7 +11,7 @@ const CloudinaryResourceList = Component.extend({
   init() {
     this._super(...arguments);
 
-    if (this.get('cloudinaryTag')) {
+    if (get(this, 'cloudinaryTag')) {
       this.fetchCloudinaryResourceList().then(
         this.handleCloudinaryResponse.bind(this)
       );
@@ -20,7 +22,7 @@ const CloudinaryResourceList = Component.extend({
     const cloudName = getOwner(this).resolveRegistration(
       'config:environment'
     ).cloudinary.cloudName;
-    const tag = this.get('cloudinaryTag');
+    const tag = get(this, 'cloudinaryTag');
     return `https://res.cloudinary.com/${cloudName}/image/list/${tag}.json`;
   },
 
@@ -33,7 +35,7 @@ const CloudinaryResourceList = Component.extend({
 
   handleCloudinaryResponse(response) {
     let items = response.resources.sortBy('context.custom.order');
-    this.set('items', items);
+    set(this, 'items', items);
     return items;
   }
 });
