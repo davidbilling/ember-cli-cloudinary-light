@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/davidbilling/ember-cli-cloudinary-light.svg?branch=master)](https://travis-ci.org/davidbilling/ember-cli-cloudinary-light)
+[![Build Status](https://travis-ci.org/davidbilling/ember-cli-cloudinary-light.svg?branch=master)](https://travis-ci.org/davidbilling/ember-cli-cloudinary-light) [![Greenkeeper badge](https://badges.greenkeeper.io/davidbilling/ember-cli-cloudinary-light.svg)](https://greenkeeper.io/)
 
 # ember-cli-cloudinary-light
 
