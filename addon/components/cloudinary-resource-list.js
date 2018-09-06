@@ -1,9 +1,9 @@
 import Component from '@ember/component';
 import { getOwner } from "@ember/application";
 import layout from '../templates/components/cloudinary-resource-list';
-import request from 'ember-ajax/request';
 import { get } from '@ember/object';
 import { set } from '@ember/object';
+import fetch from 'fetch';
 
 const CloudinaryResourceList = Component.extend({
   layout,
@@ -28,9 +28,9 @@ const CloudinaryResourceList = Component.extend({
 
   fetchCloudinaryResourceList() {
     let url = this.buildUrl();
-    return request(url).then(response => {
+    fetch(url).then(function(response) {
       return response;
-    });
+    });    
   },
 
   handleCloudinaryResponse(response) {

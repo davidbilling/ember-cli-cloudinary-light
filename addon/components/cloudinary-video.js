@@ -1,36 +1,14 @@
 import { oneWay } from '@ember/object/computed';
 import Component from '@ember/component';
 import { computed } from '@ember/object';
-import { scheduleOnce } from "@ember/runloop";
 import { getOwner } from "@ember/application";
 import { htmlSafe } from "@ember/string";
-import $ from 'jquery';
 import formatter from '../utils/variable-formatter';
 import { get } from '@ember/object';
-import { set } from '@ember/object';
 
 const CloudinaryVideoComponent = Component.extend({
   tagName: 'source',
   attributeBindings: ['src', 'width', 'height'],
-
-  didInsertElement() {
-    this._super(...arguments);
-    const _this = this;
-
-    this._resizeHandler = function () {
-      scheduleOnce('afterRender', this, () => {
-        if ($('.grid__item').width()) {
-          set(_this, 'width', $('.grid__item').width());
-        }
-      });
-    }.bind(this);
-    $(window).on('resize', this._resizeHandler);
-    this._resizeHandler();
-  },
-
-  willDestroyElement() {
-    $(window).off('resize', this._resizeHandler);
-  },
 
   width: oneWay('options.width'),
   height: oneWay('options.height'),

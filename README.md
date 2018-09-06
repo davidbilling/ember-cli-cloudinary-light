@@ -51,12 +51,14 @@ This component will render &lt;source&gt;&lt;/source&gt; tags generated from a c
 </video>
 ```
 
-There is an extra 'matchWidth' option that will resize the video to the width of the component.
+There is an extra 'matchWidth' option that will resize the video to the width with the value you inject to width.
 
 ```javascript
-<video>
-    {{cloudinary-video 'videoId' (hash controls=true matchWidth=true)}}
-</video>
+<article class="grid__item"> 
+  <video controls style="width: 100%;">
+    {{cloudinary-video 'videoId' width=[videoWidth you detremine from e.i grid__item] (hash controls=true crop='fit' matchWidth=true)}}
+  </video>
+</article>
 ```
 
 ### cloudinary-resource-list ###
@@ -86,11 +88,17 @@ Please see the Cloudinary API docs for all available properties of a resource it
 * `ember serve`
 * Visit your app at [http://localhost:4200](http://localhost:4200).
 
-## Running Tests
+### Linting
 
-* `npm test` (Runs `ember try:each` to test your addon against multiple Ember versions)
-* `ember test`
-* `ember test --server`
+* `npm run lint:hbs`
+* `npm run lint:js`
+* `npm run lint:js -- --fix`
+
+### Running tests
+
+* `ember test` – Runs the test suite on the current Ember version
+* `ember test --server` – Runs the test suite in "watch mode"
+* `ember try:each` – Runs the test suite against multiple Ember versions
 
 ## Building
 
