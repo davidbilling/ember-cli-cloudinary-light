@@ -51,16 +51,6 @@ This component will render &lt;source&gt;&lt;/source&gt; tags generated from a c
 </video>
 ```
 
-There is an extra 'matchWidth' option that will resize the video to the width with the value you inject to width.
-
-```javascript
-<article class="grid__item"> 
-  <video controls style="width: 100%;">
-    {{cloudinary-video 'videoId' width=[videoWidth you detremine from e.i grid__item] (hash controls=true crop='fit' matchWidth=true)}}
-  </video>
-</article>
-```
-
 ### cloudinary-resource-list ###
 
 This component issues an API call to Cloudinary's [Client-side resource lists](http://cloudinary.com/documentation/image_transformations#client_side_resource_lists) and will make all Cloudinary resource items available under an `items` property.

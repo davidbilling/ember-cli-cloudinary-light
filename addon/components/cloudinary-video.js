@@ -1,6 +1,7 @@
 import { oneWay } from '@ember/object/computed';
 import Component from '@ember/component';
 import { computed } from '@ember/object';
+
 import { getOwner } from "@ember/application";
 import { htmlSafe } from "@ember/string";
 import formatter from '../utils/variable-formatter';
@@ -20,14 +21,6 @@ const CloudinaryVideoComponent = Component.extend({
   src: computed('publicId', 'width', 'height', 'crop', 'fetch_format', 'quality', 'radius', function () {
     const cloudName = getOwner(this).resolveRegistration('config:environment').cloudinary.cloudName;
     let options = get(this, 'options');
-
-    //if matchWidth set to true then set to actual width
-    if (get(this, 'options') && this.get('options.matchWidth') === true) {
-      if (!get(this, 'width')) {
-        return;
-      }
-      options.width = get(this, 'width');
-    }
 
     const params = formatter(options);
     const publicId = get(this, 'publicId');
