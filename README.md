@@ -80,7 +80,6 @@ Please see the Cloudinary API docs for all available properties of a resource it
 
 ### Linting
 
-* `npm run lint:hbs`
 * `npm run lint:js`
 * `npm run lint:js -- --fix`
 
