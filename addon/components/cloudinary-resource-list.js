@@ -4,6 +4,7 @@ import layout from '../templates/components/cloudinary-resource-list';
 import { get } from '@ember/object';
 import { set } from '@ember/object';
 import fetch from 'fetch';
+import { debug } from '@ember/debug';
 
 const CloudinaryResourceList = Component.extend({
   layout,
@@ -14,7 +15,9 @@ const CloudinaryResourceList = Component.extend({
     if (get(this, 'cloudinaryTag')) {
       this.fetchCloudinaryResourceList().then(
         this.handleCloudinaryResponse.bind(this)
-      );
+      ).catch(error => {
+        debug(`Error fetching Cloudinary Resource List: ${error}`);
+      })
     }
   },
 
@@ -28,9 +31,9 @@ const CloudinaryResourceList = Component.extend({
 
   fetchCloudinaryResourceList() {
     let url = this.buildUrl();
-    fetch(url).then(function(response) {
-      return response;
-    });    
+    return fetch(url).then(function(response) {
+      return response.json();
+    });
   },
 
   handleCloudinaryResponse(response) {
