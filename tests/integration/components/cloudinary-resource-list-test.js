@@ -1,18 +1,129 @@
-import { module, test } from 'qunit';
+import { module, test, only } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { render, find } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
+import Pretender from 'pretender';
 
-module('Integration | Component | cloudinary-resource-list', function(hooks) {
+module('Integration | Component | cloudinary-resource-list', function (hooks) {
   setupRenderingTest(hooks);
 
-  test('it gracefully handles ajax errors', async function(assert) {
+  test('it gracefully handles fetch error', async function (assert) {
     await render(hbs`
-      {{#cloudinary-resource-list 'test'}}
-        template block text
+      {{#cloudinary-resource-list 'test' as |resourceList|}}
+        it renders block content
       {{/cloudinary-resource-list}}
     `);
 
-    assert.equal(this.element.textContent.trim(), 'template block text');
+    assert.equal(this.element.textContent.trim(), 'it renders block content');
+  });
+
+  test('it renders cloudinary response in correct order', async function (assert) {
+    let server = new Pretender();
+    server.get('https://res.cloudinary.com/cloudinary-test/image/list/test.json', () => {
+      let cloudinaryResourceListResponse = {
+        'resources': [{
+          public_id: 'my_project/image_b',
+          version: 1509653786,
+          format: 'jpg',
+          width: 2100,
+          height: 1400,
+          type: 'upload',
+          created_at: '2017-11-02T14:06:53Z',
+          context: {
+            custom: {
+              caption: 'Image B',
+              order: '02'
+            }
+          }
+        }, {
+          public_id: 'my_project/image_c',
+          version: 1509653789,
+          format: 'jpg',
+          width: 2100,
+          height: 1400,
+          type: 'upload',
+          created_at: '2017-11-02T14:06:53Z',
+          context: {
+            custom: {
+              caption: 'Image C',
+              order: '03'
+            }
+          }
+        }, {
+          public_id: 'my_project/image_a',
+          version: 1509653787,
+          format: 'jpg',
+          width: 2100,
+          height: 1400,
+          type: 'upload',
+          created_at: '2017-11-02T14:06:52Z',
+          context: {
+            custom: {
+              caption: 'Image A',
+              order: '01'
+            }
+          }
+        }],
+        updated_at: '2017-11-03T13:16:29Z'
+      }
+      return [200, {
+        'Content-Type': 'application/json'
+      }, JSON.stringify(cloudinaryResourceListResponse)]
+    });
+
+    await render(hbs`
+      {{#cloudinary-resource-list 'test' as |resourceList|}}
+        {{#each resourceList.items as |item|}}
+          <span>{{item.public_id}}</span>
+        {{/each}}
+      {{/cloudinary-resource-list}}
+    `);
+
+    assert.ok(find('span').textContent.trim().endsWith('image_a'), 'Image A order is OK');
+    assert.ok(find('span:nth-child(2)').textContent.trim().endsWith('image_b'), 'Image B order is OK');
+    assert.ok(find('span:nth-child(3)').textContent.trim().endsWith('image_c'), 'Image C order is OK');
+  });
+
+  only('it fetches images without custom context', async function(assert) {
+    let server = new Pretender();
+    server.get('https://res.cloudinary.com/cloudinary-test/image/list/test.json', () => {
+      let cloudinaryResourceListResponse = {
+        resources: [
+          {
+            public_id: 'image_a',
+            version: 1476216440,
+            format: 'png',
+            width: 500,
+            height: 500,
+            type: 'upload',
+            created_at: '2016-10-11T20:07:20Z'
+          },
+          {
+            public_id: 'image_b',
+            version: 1476216439,
+            format: 'png',
+            width: 500,
+            height: 500,
+            type: 'upload',
+            created_at: '2016-10-11T20:07:19Z'
+          }
+        ],
+        updated_at: '2018-09-19T15:56:04Z'
+      };
+      return [200, {
+        'Content-Type': 'application/json'
+      }, JSON.stringify(cloudinaryResourceListResponse)]
+    });
+
+    await render(hbs`
+      {{#cloudinary-resource-list 'test' as |resourceList|}}
+        {{#each resourceList.items as |item|}}
+          <span id="{{item.public_id}}">Resource {{item.public_id}}</span>
+        {{/each}}
+      {{/cloudinary-resource-list}}
+    `);
+
+    assert.ok(find('#image_a'), 'image_a exists');
+    assert.ok(find('#image_b'), 'image_b exists');
   });
 });
