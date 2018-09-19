@@ -37,9 +37,25 @@ const CloudinaryResourceList = Component.extend({
   },
 
   handleCloudinaryResponse(response) {
-    let items = response.resources.sortBy('context.custom.order');
-    set(this, 'items', items);
-    return items;
+    response.resources.sort((a, b) => {
+      if (!a.context || !a.context.custom || !b.context || !b.context.custom) {
+        return;
+      }
+
+      let { context: { custom: { order: orderA }}} = a;
+      let { context: { custom: { order: orderB }}} = b;
+
+      if (orderA < orderB) {
+        return -1;
+      }
+      if (orderA > orderB) {
+        return 1;
+      }
+      return 0;
+    })
+
+    set(this, 'items', response.resources);
+    return response;
   }
 });
 
