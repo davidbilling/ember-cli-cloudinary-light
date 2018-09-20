@@ -55,7 +55,7 @@ const CloudinaryResourceList = Component.extend({
     })
 
     set(this, 'items', response.resources);
-    return response;
+    return response.resources;
   }
 });
 

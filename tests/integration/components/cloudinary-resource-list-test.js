@@ -1,4 +1,4 @@
-import { module, test, only } from 'qunit';
+import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render, find } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
@@ -6,6 +6,14 @@ import Pretender from 'pretender';
 
 module('Integration | Component | cloudinary-resource-list', function (hooks) {
   setupRenderingTest(hooks);
+
+  hooks.beforeEach(function() {
+    this.server = new Pretender();
+  });
+
+  hooks.afterEach(function() {
+    this.server.shutdown();
+  });
 
   test('it gracefully handles fetch error', async function (assert) {
     await render(hbs`
@@ -18,8 +26,7 @@ module('Integration | Component | cloudinary-resource-list', function (hooks) {
   });
 
   test('it renders cloudinary response in correct order', async function (assert) {
-    let server = new Pretender();
-    server.get('https://res.cloudinary.com/cloudinary-test/image/list/test.json', () => {
+    this.server.get('https://res.cloudinary.com/cloudinary-test/image/list/test.json', () => {
       let cloudinaryResourceListResponse = {
         'resources': [{
           public_id: 'my_project/image_b',
@@ -84,9 +91,8 @@ module('Integration | Component | cloudinary-resource-list', function (hooks) {
     assert.ok(find('span:nth-child(3)').textContent.trim().endsWith('image_c'), 'Image C order is OK');
   });
 
-  only('it fetches images without custom context', async function(assert) {
-    let server = new Pretender();
-    server.get('https://res.cloudinary.com/cloudinary-test/image/list/test.json', () => {
+  test('it fetches images without custom context', async function(assert) {
+    this.server.get('https://res.cloudinary.com/cloudinary-test/image/list/test.json', () => {
       let cloudinaryResourceListResponse = {
         resources: [
           {
