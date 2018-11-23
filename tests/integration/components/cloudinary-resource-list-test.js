@@ -22,7 +22,7 @@ module('Integration | Component | cloudinary-resource-list', function (hooks) {
       {{/cloudinary-resource-list}}
     `);
 
-    assert.equal(this.element.textContent.trim(), 'it renders block content');
+    assert.dom(this.element).hasText('it renders block content');
   });
 
   test('it renders cloudinary response in correct order', async function (assert) {
@@ -129,7 +129,7 @@ module('Integration | Component | cloudinary-resource-list', function (hooks) {
       {{/cloudinary-resource-list}}
     `);
 
-    assert.ok(find('#image_a'), 'image_a exists');
-    assert.ok(find('#image_b'), 'image_b exists');
+    assert.dom('#image_a').exists('image_a exists');
+    assert.dom('#image_b').exists('image_b exists');
   });
 });

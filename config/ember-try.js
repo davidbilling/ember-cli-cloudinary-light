@@ -9,10 +9,13 @@ module.exports = function() {
     getChannelURL('canary')
   ]).then((urls) => {
     return {
-      useYarn: true,
+      useYarn: false,
       scenarios: [
         {
           name: 'ember-lts-2.16',
+          env: {
+            EMBER_OPTIONAL_FEATURES: JSON.stringify({ 'jquery-integration': false })
+          },
           npm: {
             devDependencies: {
               'ember-source': '~2.16.0'
@@ -21,6 +24,9 @@ module.exports = function() {
         },
         {
           name: 'ember-lts-2.18',
+          env: {
+            EMBER_OPTIONAL_FEATURES: JSON.stringify({ 'jquery-integration': false })
+          },
           npm: {
             devDependencies: {
               'ember-source': '~2.18.0'
