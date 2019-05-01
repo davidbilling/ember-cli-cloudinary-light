@@ -1,1 +1,0 @@
-[2,"Handlebars",10,"addon\\helpers\\safe-cloudinary-url.js","  compute(params, hash) {\r\n    const cloudName = getOwner(this).resolveRegistration('config:environment').cloudinary.cloudName;\r\n    const publicId = Ember.Handlebars.Utils.escapeExpression(params[0]);\r\n    const parameters = formatter(hash);\r\n\r"]
