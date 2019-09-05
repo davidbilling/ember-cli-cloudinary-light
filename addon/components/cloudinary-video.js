@@ -19,7 +19,6 @@ const CloudinaryVideoComponent = Component.extend({
   radius: oneWay('options.radius'),
 
   src: computed('publicId', 'width', 'height', 'crop', 'fetch_format', 'quality', 'radius', function () {
-    /* Note: You must implement #escapeCSS. */
     const cloudName = Ember.Handlebars.Utils.escapeExpression(getOwner(this).resolveRegistration('config:environment').cloudinary.cloudName);
     let options = get(this, 'options');
 

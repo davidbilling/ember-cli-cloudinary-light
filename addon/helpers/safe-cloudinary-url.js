@@ -6,13 +6,12 @@ import formatter from '../utils/variable-formatter';
 
 export default Helper.extend({
   compute(params, hash) {
-    /* Note: You must implement #escapeCSS. */
     const cloudName = Ember.Handlebars.Utils.escapeExpression(getOwner(this).resolveRegistration('config:environment').cloudinary.cloudName);
     const publicId = Ember.Handlebars.Utils.escapeExpression(params[0]);
     const parameters = Ember.Handlebars.Utils.escapeExpression(formatter(hash));
 
     if (publicId) {
-      return htmlSafe(`background-image: url('https://res.cloudinary.com/${cloudName}/image/upload${parameters}/${publicId}')`);
+      return htmlSafe("background-image: url('https://res.cloudinary.com/" + cloudName + "/image/upload" + parameters + "/" + publicId + "')");
     }
   }
 });
