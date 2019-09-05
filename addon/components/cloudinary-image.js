@@ -1,3 +1,4 @@
+import Ember from 'ember';  //So far Ember.Handlebars.Utils.escapeExpression is not a Module
 import { oneWay } from '@ember/object/computed';
 import Component from '@ember/component';
 import { computed } from '@ember/object';
@@ -28,9 +29,10 @@ const CloudinaryImageComponent = Component.extend({
   default_image: oneWay('options.default_image'),
 
   src: computed('publicId', 'width', 'height', 'crop', 'fetch_format', 'quality', 'default_image', function () {
-    const cloudName = getOwner(this).resolveRegistration('config:environment').cloudinary.cloudName;
-    const params = formatter(get(this, 'options'));
-    const publicId = get(this, 'publicId');
+    /* Note: You must implement #escapeCSS. */
+    const cloudName = Ember.Handlebars.Utils.escapeExpression(getOwner(this).resolveRegistration('config:environment').cloudinary.cloudName);
+    const params = Ember.Handlebars.Utils.escapeExpression(formatter(get(this, 'options')));
+    const publicId = Ember.Handlebars.Utils.escapeExpression(get(this, 'publicId'));
 
     const image = `https://res.cloudinary.com/${cloudName}/image/upload${params}/${publicId}`;
     return htmlSafe(image);

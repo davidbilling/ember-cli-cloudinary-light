@@ -7,11 +7,11 @@ import Pretender from 'pretender';
 module('Integration | Component | cloudinary-resource-list', function (hooks) {
   setupRenderingTest(hooks);
 
-  hooks.beforeEach(function() {
+  hooks.beforeEach(function () {
     this.server = new Pretender();
   });
 
-  hooks.afterEach(function() {
+  hooks.afterEach(function () {
     this.server.shutdown();
   });
 
@@ -91,7 +91,7 @@ module('Integration | Component | cloudinary-resource-list', function (hooks) {
     assert.ok(find('span:nth-child(3)').textContent.trim().endsWith('image_c'), 'Image C order is OK');
   });
 
-  test('it fetches images without custom context', async function(assert) {
+  test('it fetches images without custom context', async function (assert) {
     this.server.get('https://res.cloudinary.com/cloudinary-test/image/list/test.json', () => {
       let cloudinaryResourceListResponse = {
         resources: [

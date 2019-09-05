@@ -4,18 +4,18 @@ import { setupTest } from 'ember-qunit';
 
 const cloudName = 'test-cloud';
 
-module('Unit | Component | cloudinary-resource-list', function(hooks) {
+module('Unit | Component | cloudinary-resource-list', function (hooks) {
   setupTest(hooks);
 
   // Specify the other units that are required for this test.
   // needs: []
-  hooks.beforeEach(function() {
+  hooks.beforeEach(function () {
     this.owner.register('config:environment', {
       cloudinary: { cloudName }
     });
   });
 
-  test('Cloudinary URL is composed correctly', function(assert) {
+  test('Cloudinary URL is composed correctly', function (assert) {
     let component = this.owner.factoryFor('component:cloudinary-resource-list').create();
 
     let tag = 'my-tag';
@@ -29,7 +29,7 @@ module('Unit | Component | cloudinary-resource-list', function(hooks) {
     );
   });
 
-  test('Response is sorted correctly', function(assert) {
+  test('Response is sorted correctly', function (assert) {
     let component = this.owner.factoryFor('component:cloudinary-resource-list').create();
 
     let response = {

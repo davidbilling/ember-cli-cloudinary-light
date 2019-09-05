@@ -31,7 +31,7 @@ const CloudinaryResourceList = Component.extend({
 
   fetchCloudinaryResourceList() {
     let url = this.buildUrl();
-    return fetch(url).then(function(response) {
+    return fetch(url).then(function (response) {
       return response.json();
     });
   },
@@ -42,8 +42,8 @@ const CloudinaryResourceList = Component.extend({
         return;
       }
 
-      let { context: { custom: { order: orderA }}} = a;
-      let { context: { custom: { order: orderB }}} = b;
+      let { context: { custom: { order: orderA } } } = a;
+      let { context: { custom: { order: orderB } } } = b;
 
       if (orderA < orderB) {
         return -1;
