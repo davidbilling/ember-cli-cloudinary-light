@@ -29,7 +29,6 @@ const CloudinaryImageComponent = Component.extend({
   default_image: oneWay('options.default_image'),
 
   src: computed('publicId', 'width', 'height', 'crop', 'fetch_format', 'quality', 'default_image', function () {
-    /* Note: You must implement #escapeCSS. */
     const cloudName = Ember.Handlebars.Utils.escapeExpression(getOwner(this).resolveRegistration('config:environment').cloudinary.cloudName);
     const params = Ember.Handlebars.Utils.escapeExpression(formatter(get(this, 'options')));
     const publicId = Ember.Handlebars.Utils.escapeExpression(get(this, 'publicId'));
