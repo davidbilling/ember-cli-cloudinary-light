@@ -11,6 +11,8 @@ Compatibility
 * Ember CLI v2.13 or above
 * Versions 0.4.0 and above Requires Node.js >=8.10.0
 
+From version 0.6.0 there is **no positional parameters**, publicId and options are arguments!
+
 ## Installation
 
 ```ember install ember-cli-cloudinary-light```
@@ -29,14 +31,36 @@ cloudinary: {
 
 This component will render an <img> built from a cloudinary url and options.
 
-```javascript
-{{cloudinary-image 'imageId' (hash width=100)}}
+```hbs
+<CloudinaryImage @publicId={{this.myImageId}} @options={{hash width='60' height='60' crop='fill' quality='auto'}} />
 ```
 
 Width and height attributes are set on the img tag as well as passed to cloudinary, allowing you to specify the resolution via the "dpr" attribute.
 
-```javascript
-{{cloudinary-image 'imageId' (hash width=100 height=100 dpr="2.0")}}
+```hbs
+<CloudinaryImage @publicId={{this.myImageId}} @options={{hash width='60' height='60' dpr='2.0'}} />
+```
+
+### cloudinary-video ###
+
+This will render a <source> for use in a <video>
+
+```hbs
+<video controls>
+  <CloudinaryVideo @publicId='dog.mp4'/>
+</video>
+```
+
+### cloudinary-resource-list ###
+
+Cloudinary's Client Side Resource Lists allow you to list cloudinary resources for a given tag.
+
+```hbs
+<CloudinaryResourceList @cloudinaryTag='logo' as |resourceList|>
+  {{#each resourceList.items as |item|}}
+    <span>{{item.public_id}}</span>
+  {{/each}}
+</CloudinaryResourceList>
 ```
 
 ### safe-cloudinary-url helper ###

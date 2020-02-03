@@ -1,0 +1,25 @@
+<input placeholder="my width" {{on 'blur' this.changeWidth}}>
+<CloudinaryImage @publicId={{this.picture}} @options={{hash width='60' height='60' crop='fill' gravity='faces'
+    dpr='auto'
+    fetch_format='auto'
+    quality='auto'
+    default_image='placeholder-user.png'}} />
+
+<CloudinaryImage @publicId={{this.picture}} @options={{hash width=this.width height='160'
+    dpr='auto'
+    fetch_format='auto'
+    quality='auto'
+    default_image='placeholder-user.png'}} />
+
+Video:
+<video controls>
+  <CloudinaryVideo @publicId='dog.mp4'/>
+</video>
+
+Resource list:
+<CloudinaryResourceList @cloudinaryTag='logo' as |resourceList|>
+  {{#each resourceList.items as |item|}}
+  <span>{{item.public_id}}</span>
+  <br>
+  {{/each}}
+</CloudinaryResourceList>

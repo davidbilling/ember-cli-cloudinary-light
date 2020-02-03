@@ -17,9 +17,9 @@ module('Integration | Component | cloudinary-resource-list', function (hooks) {
 
   test('it gracefully handles fetch error', async function (assert) {
     await render(hbs`
-      {{#cloudinary-resource-list 'test' as |resourceList|}}
+      <CloudinaryResourceList @cloudinaryTag='test' as |resourceList|>
         it renders block content
-      {{/cloudinary-resource-list}}
+      </CloudinaryResourceList>
     `);
 
     assert.dom(this.element).hasText('it renders block content');
@@ -79,11 +79,11 @@ module('Integration | Component | cloudinary-resource-list', function (hooks) {
     });
 
     await render(hbs`
-      {{#cloudinary-resource-list 'test' as |resourceList|}}
+      <CloudinaryResourceList @cloudinaryTag='test' as |resourceList|>
         {{#each resourceList.items as |item|}}
           <span>{{item.public_id}}</span>
         {{/each}}
-      {{/cloudinary-resource-list}}
+      </CloudinaryResourceList>
     `);
 
     assert.ok(find('span').textContent.trim().endsWith('image_a'), 'Image A order is OK');
@@ -122,11 +122,11 @@ module('Integration | Component | cloudinary-resource-list', function (hooks) {
     });
 
     await render(hbs`
-      {{#cloudinary-resource-list 'test' as |resourceList|}}
+      <CloudinaryResourceList @cloudinaryTag='test' as |resourceList|>
         {{#each resourceList.items as |item|}}
           <span id="{{item.public_id}}">Resource {{item.public_id}}</span>
         {{/each}}
-      {{/cloudinary-resource-list}}
+      </CloudinaryResourceList>
     `);
 
     assert.dom('#image_a').exists('image_a exists');
