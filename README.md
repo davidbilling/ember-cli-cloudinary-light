@@ -7,9 +7,9 @@ Ember addon for Cloudinary without jquery. Works good for fastboot.
 Compatibility
 ------------------------------------------------------------------------------
 
-* Ember.js v3.8 or above
+* Ember.js v3.12 or above
 * Ember CLI v2.13 or above
-* Versions 0.4.0 and above Requires Node.js >=8.10.0
+* Node.js v10 or above
 
 From version 0.6.0 there is **no positional parameters**, publicId and options are arguments!
 

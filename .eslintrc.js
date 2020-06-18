@@ -1,5 +1,5 @@
-/*eslint no-undef: "error"*/
-/*eslint-env node*/
+'use strict';
+
 module.exports = {
   root: true,
   parser: 'babel-eslint',
