@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/davidbilling/ember-cli-cloudinary-light.svg?branch=master)](https://travis-ci.org/davidbilling/ember-cli-cloudinary-light) 
-
 # ember-cli-cloudinary-light
 
 Ember addon for Cloudinary without jquery. Works good for fastboot.
