@@ -22,8 +22,8 @@ module.exports = function (environment) {
       // when it is created
     },
     cloudinary: {
-      cloudName: 'cloudinary-test'
-    }
+      cloudName: 'cloudinary-test',
+    },
   };
 
   if (environment === 'development') {
@@ -33,8 +33,8 @@ module.exports = function (environment) {
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
     ENV.cloudinary = {
-      cloudName: 'demo'
-    }
+      cloudName: 'demo',
+    };
   }
 
   if (environment === 'test') {

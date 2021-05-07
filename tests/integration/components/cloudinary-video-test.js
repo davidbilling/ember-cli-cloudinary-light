@@ -8,6 +8,11 @@ module('Integration | Component | cloudinary video', function (hooks) {
 
   test('it renders a video', async function (assert) {
     await render(hbs`<CloudinaryVideo @publicId='dog'/>`);
-    assert.dom('source').hasAttribute('src', 'https://res.cloudinary.com/cloudinary-test/video/upload/dog');
+    assert
+      .dom('source')
+      .hasAttribute(
+        'src',
+        'https://res.cloudinary.com/cloudinary-test/video/upload/dog'
+      );
   });
 });

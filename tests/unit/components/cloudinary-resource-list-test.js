@@ -11,12 +11,14 @@ module('Unit | Component | cloudinary-resource-list', function (hooks) {
   // needs: []
   hooks.beforeEach(function () {
     this.owner.register('config:environment', {
-      cloudinary: { cloudName }
+      cloudinary: { cloudName },
     });
   });
 
   test('Cloudinary URL is composed correctly', function (assert) {
-    let component = this.owner.factoryFor('component:cloudinary-resource-list').create();
+    let component = this.owner
+      .factoryFor('component:cloudinary-resource-list')
+      .create();
 
     let tag = 'my-tag';
     component.set('cloudinaryTag', tag);
@@ -30,14 +32,16 @@ module('Unit | Component | cloudinary-resource-list', function (hooks) {
   });
 
   test('Response is sorted correctly', function (assert) {
-    let component = this.owner.factoryFor('component:cloudinary-resource-list').create();
+    let component = this.owner
+      .factoryFor('component:cloudinary-resource-list')
+      .create();
 
     let response = {
       resources: A([
         { publid_id: 1, context: { custom: { order: 3 } } },
         { publid_id: 2, context: { custom: { order: 2 } } },
-        { publid_id: 3, context: { custom: { order: 1 } } }
-      ])
+        { publid_id: 3, context: { custom: { order: 1 } } },
+      ]),
     };
 
     let orderedItems = component.handleCloudinaryResponse(response);

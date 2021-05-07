@@ -66,5 +66,5 @@ export default function variableFormatter(options) {
     variables.push('u_' + options.underlay);
   }
 
-  return '/' + variables.join(",");
+  return '/' + variables.join(',');
 }
