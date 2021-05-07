@@ -1,25 +1,24 @@
 import Ember from 'ember'; //So far Ember.Handlebars.Utils.escapeExpression is not a Module
-import Component from '@ember/component';
+import Component from '@glimmer/component';
 import { getOwner } from '@ember/application';
 import { htmlSafe } from '@ember/string';
 import formatter from '../utils/variable-formatter';
 
 export default class CloudinaryVideoComponent extends Component {
-  tagName = 'source';
   attributeBindings = ['src', 'width', 'height'];
 
   get width() {
-    if (!this.options) {
+    if (!this.args.options) {
       return 0;
     }
-    return this.options.width;
+    return this.args.options.width;
   }
 
   get height() {
-    if (!this.options) {
+    if (!this.args.options) {
       return 0;
     }
-    return this.options.height;
+    return this.args.options.height;
   }
 
   get src() {
@@ -28,9 +27,9 @@ export default class CloudinaryVideoComponent extends Component {
         .cloudName
     );
     const params = Ember.Handlebars.Utils.escapeExpression(
-      formatter(this.options)
+      formatter(this.args.options)
     );
-    const publicId = Ember.Handlebars.Utils.escapeExpression(this.publicId);
+    const publicId = Ember.Handlebars.Utils.escapeExpression(this.args.publicId);
 
     const cloudinaryVideoTag = `https://res.cloudinary.com/${cloudName}/video/upload${params}/${publicId}`;
     return htmlSafe(cloudinaryVideoTag);

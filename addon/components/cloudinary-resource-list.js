@@ -1,27 +1,28 @@
-import Component from '@ember/component';
+import Component from '@glimmer/component';
 import { getOwner } from '@ember/application';
 import fetch from 'fetch';
 import { debug } from '@ember/debug';
 import { tracked } from '@glimmer/tracking';
 
 export default class CloudinaryResourceList extends Component {
-  @tracked items;
+  @tracked _items;
 
-  didReceiveAttrs() {
-    super.didReceiveAttrs();
-    if (this.cloudinaryTag) {
+  get items() {
+    if (this.args.cloudinaryTag) {
       this.fetchCloudinaryResourceList()
         .then(this.handleCloudinaryResponse.bind(this))
         .catch((error) => {
           debug(`Error fetching Cloudinary Resource List: ${error}`);
         });
     }
+
+    return this._items;
   }
 
   buildUrl() {
     const cloudName = getOwner(this).resolveRegistration('config:environment')
       .cloudinary.cloudName;
-    const tag = this.cloudinaryTag;
+    const tag = this.args.cloudinaryTag;
     return `https://res.cloudinary.com/${cloudName}/image/list/${tag}.json`;
   }
 
@@ -58,7 +59,7 @@ export default class CloudinaryResourceList extends Component {
       return 0;
     });
 
-    this.items = response.resources;
+    this._items = response.resources;
     return response.resources;
   }
 }

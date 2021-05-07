@@ -4,7 +4,7 @@ import { getOwner } from '@ember/application';
 import { htmlSafe } from '@ember/string';
 import formatter from '../utils/variable-formatter';
 
-export default Helper.extend({
+export default class safecloudinaryurl extends Helper {
   compute(params, hash) {
     const cloudName = Ember.Handlebars.Utils.escapeExpression(
       getOwner(this).resolveRegistration('config:environment').cloudinary
@@ -24,5 +24,5 @@ export default Helper.extend({
           "')"
       );
     }
-  },
-});
+  }
+}

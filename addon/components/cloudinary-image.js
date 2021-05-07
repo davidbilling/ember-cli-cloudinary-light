@@ -1,41 +1,48 @@
 import Ember from 'ember'; //So far Ember.Handlebars.Utils.escapeExpression is not a Module
-import Component from '@ember/component';
+import Component from '@glimmer/component';
 import { getOwner } from '@ember/application';
 import { htmlSafe } from '@ember/string';
 import formatter from '../utils/variable-formatter';
 import { tracked } from '@glimmer/tracking';
 
 export default class CloudinaryImageComponent extends Component {
-  tagName = 'img';
-  attributeBindings = ['src', 'width', 'height'];
   @tracked options;
 
-  get width() {
-    if (!this.options) {
-      return 0;
-    }
-    if (
-      this.options.crop === 'limit' ||
-      this.options.crop === 'fit' ||
-      this.options.crop === 'lfill'
-    ) {
-      return null;
-    }
-    return this.options.width;
+  get alt() {
+    if (!this.args.options) {
+      return '';
+    }    
+
+    return this.args.options.alt;
   }
-  get height() {
-    if (!this.options) {
+
+  get width() {
+    if (!this.args.options) {
       return 0;
     }
     if (
-      this.options &&
-      (this.options.crop === 'limit' ||
-        this.options.crop === 'fit' ||
-        this.options.crop === 'lfill')
+      this.args.options.crop === 'limit' ||
+      this.args.options.crop === 'fit' ||
+      this.args.options.crop === 'lfill'
     ) {
       return null;
     }
-    return this.options.height;
+    return this.args.options.width;
+  }
+
+  get height() {
+    if (!this.args.options) {
+      return 0;
+    }
+    if (
+      this.args.options &&
+      (this.args.options.crop === 'limit' ||
+        this.args.options.crop === 'fit' ||
+        this.args.options.crop === 'lfill')
+    ) {
+      return null;
+    }
+    return this.args.options.height;
   }
 
   get src() {
@@ -44,9 +51,9 @@ export default class CloudinaryImageComponent extends Component {
         .cloudName
     );
     const params = Ember.Handlebars.Utils.escapeExpression(
-      formatter(this.options)
+      formatter(this.args.options)
     );
-    const publicId = Ember.Handlebars.Utils.escapeExpression(this.publicId);
+    const publicId = Ember.Handlebars.Utils.escapeExpression(this.args.publicId);
 
     const image = `https://res.cloudinary.com/${cloudName}/image/upload${params}/${publicId}`;
     return htmlSafe(image);

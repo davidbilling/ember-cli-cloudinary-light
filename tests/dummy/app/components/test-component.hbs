@@ -1,4 +1,5 @@
-<input placeholder="my width" {{on 'blur' this.changeWidth}}>
+<input placeholder="my width" {{on 'blur' this.changeWidth}} aria-label='test' value='100'>
+
 <CloudinaryImage @publicId={{this.picture}} @options={{hash width='60' height='60' crop='fill' gravity='faces'
     dpr='auto'
     fetch_format='auto'
@@ -13,11 +14,14 @@
 
 Video:
 <video controls>
-  <CloudinaryVideo @publicId='dog.mp4'/>
+  <CloudinaryVideo @publicId='dog.mp4' @options={{hash width='200' height='160' }}/>
 </video>
 
 Resource list:
-<CloudinaryResourceList @cloudinaryTag='logo' as |resourceList|>
+
+<input placeholder="Set resourcelist tag" {{on 'blur' this.setResourceTag}} aria-label='test' value='logo'>
+
+<CloudinaryResourceList @cloudinaryTag={{this.tag}} as |resourceList|>
   {{#each resourceList.items as |item|}}
   <span>{{item.public_id}}</span>
   <br>
