@@ -27,7 +27,7 @@ cloudinary: {
 
 ### cloudinary-image ###
 
-This component will render an <img> built from a cloudinary url and options.
+This component will render an ``<img>`` built from a cloudinary url and options.
 
 ```hbs
 <CloudinaryImage @publicId={{this.myImageId}} @options={{hash width='60' height='60' crop='fill' quality='auto'}} />
@@ -41,7 +41,7 @@ Width and height attributes are set on the img tag as well as passed to cloudina
 
 ### cloudinary-video ###
 
-This will render a <source> for use in a <video>
+This will render a ``<source>`` for use in a ``<video>``
 
 ```hbs
 <video controls>
