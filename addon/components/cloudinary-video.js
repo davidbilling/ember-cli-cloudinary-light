@@ -29,7 +29,9 @@ export default class CloudinaryVideoComponent extends Component {
     const params = Ember.Handlebars.Utils.escapeExpression(
       formatter(this.args.options)
     );
-    const publicId = Ember.Handlebars.Utils.escapeExpression(this.args.publicId);
+    const publicId = Ember.Handlebars.Utils.escapeExpression(
+      this.args.publicId
+    );
 
     const cloudinaryVideoTag = `https://res.cloudinary.com/${cloudName}/video/upload${params}/${publicId}`;
     return htmlSafe(cloudinaryVideoTag);

@@ -11,7 +11,7 @@ export default class CloudinaryImageComponent extends Component {
   get alt() {
     if (!this.args.options) {
       return '';
-    }    
+    }
 
     return this.args.options.alt;
   }
@@ -53,7 +53,9 @@ export default class CloudinaryImageComponent extends Component {
     const params = Ember.Handlebars.Utils.escapeExpression(
       formatter(this.args.options)
     );
-    const publicId = Ember.Handlebars.Utils.escapeExpression(this.args.publicId);
+    const publicId = Ember.Handlebars.Utils.escapeExpression(
+      this.args.publicId
+    );
 
     const image = `https://res.cloudinary.com/${cloudName}/image/upload${params}/${publicId}`;
     return htmlSafe(image);

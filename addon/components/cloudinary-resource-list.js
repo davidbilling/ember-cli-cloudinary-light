@@ -20,8 +20,9 @@ export default class CloudinaryResourceList extends Component {
   }
 
   buildUrl() {
-    const cloudName = getOwner(this).resolveRegistration('config:environment')
-      .cloudinary.cloudName;
+    const cloudName =
+      getOwner(this).resolveRegistration('config:environment').cloudinary
+        .cloudName;
     const tag = this.args.cloudinaryTag;
     return `https://res.cloudinary.com/${cloudName}/image/list/${tag}.json`;
   }

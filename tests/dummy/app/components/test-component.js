@@ -16,5 +16,4 @@ export default class TimeInputComponent extends Component {
   setResourceTag(input) {
     this.tag = input.target.value;
   }
-  
 }
