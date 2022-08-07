@@ -27,7 +27,7 @@ module('Integration | Component | cloudinary-resource-list', function (hooks) {
 
   test('it renders cloudinary response in correct order', async function (assert) {
     this.server.get(
-      'https://res.cloudinary.com/cloudinary-test/image/list/test.json',
+      'https://res.cloudinary.com/demo/image/list/test.json',
       () => {
         let cloudinaryResourceListResponse = {
           resources: [
@@ -113,7 +113,7 @@ module('Integration | Component | cloudinary-resource-list', function (hooks) {
 
   test('it fetches images without custom context', async function (assert) {
     this.server.get(
-      'https://res.cloudinary.com/cloudinary-test/image/list/test.json',
+      'https://res.cloudinary.com/demo/image/list/test.json',
       () => {
         let cloudinaryResourceListResponse = {
           resources: [

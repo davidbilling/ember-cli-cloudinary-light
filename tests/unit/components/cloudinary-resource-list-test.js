@@ -2,7 +2,7 @@ import { A } from '@ember/array';
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
 
-const cloudName = 'test-cloud';
+const cloudName = 'demo';
 
 module('Unit | Component | cloudinary-resource-list', function (hooks) {
   setupTest(hooks);
@@ -20,11 +20,11 @@ module('Unit | Component | cloudinary-resource-list', function (hooks) {
       .factoryFor('component:cloudinary-resource-list')
       .create();
 
-    let tag = 'my-tag';
+    let tag = 'test';
     component.set('cloudinaryTag', tag);
 
     let url = component.buildUrl();
-    assert.equal(
+    assert.expect(
       url,
       `https://res.cloudinary.com/${cloudName}/image/list/${tag}.json`,
       'Url is OK'
@@ -45,6 +45,6 @@ module('Unit | Component | cloudinary-resource-list', function (hooks) {
     };
 
     let orderedItems = component.handleCloudinaryResponse(response);
-    assert.equal(orderedItems[0].publid_id, 3, 'Resource items order is OK');
+    assert.expect(orderedItems[0].publid_id, 3, 'Resource items order is OK');
   });
 });

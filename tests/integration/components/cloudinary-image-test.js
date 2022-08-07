@@ -10,10 +10,7 @@ module('Integration | Component | cloudinary image', function (hooks) {
     await render(hbs`<CloudinaryImage @publicId='test'/>`);
     assert
       .dom('img')
-      .hasAttribute(
-        'src',
-        'https://res.cloudinary.com/cloudinary-test/image/upload/test'
-      );
+      .hasAttribute('src', 'https://res.cloudinary.com/demo/image/upload/test');
   });
 
   test('it renders an image with width and height options', async function (assert) {
@@ -25,7 +22,7 @@ module('Integration | Component | cloudinary image', function (hooks) {
       .dom('img')
       .hasAttribute(
         'src',
-        'https://res.cloudinary.com/cloudinary-test/image/upload/h_100,w_100/test'
+        'https://res.cloudinary.com/demo/image/upload/h_100,w_100/test'
       );
     assert.dom('img').hasAttribute('width', '100');
     assert.dom('img').hasAttribute('height', '100');
@@ -40,7 +37,7 @@ module('Integration | Component | cloudinary image', function (hooks) {
       .dom('img')
       .hasAttribute(
         'src',
-        'https://res.cloudinary.com/cloudinary-test/image/upload/h_100,w_100,c_fill/test'
+        'https://res.cloudinary.com/demo/image/upload/h_100,w_100,c_fill/test'
       );
     assert.dom('img').hasAttribute('width', '100');
     assert.dom('img').hasAttribute('height', '100');
@@ -55,7 +52,7 @@ module('Integration | Component | cloudinary image', function (hooks) {
       .dom('img')
       .hasAttribute(
         'src',
-        'https://res.cloudinary.com/cloudinary-test/image/upload/h_100,c_limit/test'
+        'https://res.cloudinary.com/demo/image/upload/h_100,c_limit/test'
       );
     assert.dom('img').doesNotHaveAttribute('width');
     assert.dom('img').doesNotHaveAttribute('height');
@@ -69,7 +66,7 @@ module('Integration | Component | cloudinary image', function (hooks) {
       .dom('img')
       .hasAttribute(
         'src',
-        'https://res.cloudinary.com/cloudinary-test/image/upload/h_100,c_lfill/test'
+        'https://res.cloudinary.com/demo/image/upload/h_100,c_lfill/test'
       );
     assert.dom('img').doesNotHaveAttribute('width');
     assert.dom('img').doesNotHaveAttribute('height');
@@ -83,7 +80,7 @@ module('Integration | Component | cloudinary image', function (hooks) {
       .dom('img')
       .hasAttribute(
         'src',
-        'https://res.cloudinary.com/cloudinary-test/image/upload/h_100,w_100,c_fit/test'
+        'https://res.cloudinary.com/demo/image/upload/h_100,w_100,c_fit/test'
       );
     assert.dom('img').doesNotHaveAttribute('width');
     assert.dom('img').doesNotHaveAttribute('height');

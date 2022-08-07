@@ -18,7 +18,7 @@ module.exports = function (environment) {
       // when it is created
     },
     cloudinary: {
-      cloudName: 'cloudinary-test',
+      cloudName: 'demo',
     },
   };
 
