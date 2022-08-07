@@ -2,12 +2,11 @@
 
 Ember addon for Cloudinary without jquery. Works good for fastboot.
 
-Compatibility
-------------------------------------------------------------------------------
+## Compatibility
 
-* Ember.js v3.20 or above
-* Ember CLI v3.20 or above
-* Node.js v12 or above
+* Ember.js v3.24 or above
+* Ember CLI v3.24 or above
+* Node.js v14 or above
 
 From version 0.6.0 there is **no positional parameters**, publicId and options are arguments!
 
@@ -65,13 +64,11 @@ Cloudinary's Client Side Resource Lists allow you to list cloudinary resources f
 
 This helper can be used in styles when you want to have dynamic url:s to cloudinary. It will return "background-image: url(..)" ready to use in a style element.
 
-Contributing
-------------------------------------------------------------------------------
+## Contributing
 
 See the [Contributing](CONTRIBUTING.md) guide for details.
 
 
-License
-------------------------------------------------------------------------------
+## License
 
 This project is licensed under the [MIT License](LICENSE.md).
