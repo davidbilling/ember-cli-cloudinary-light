@@ -1,3 +1,4 @@
+/* eslint-disable qunit/no-commented-tests */
 //TODO: Unit test for glimmer components is not supported. Also the URL and response is already tested in other tests.
 
 // import { A } from '@ember/array';
