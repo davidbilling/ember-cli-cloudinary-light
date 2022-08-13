@@ -10,9 +10,6 @@ module('Integration | Component | cloudinary video', function (hooks) {
     await render(hbs`<CloudinaryVideo @publicId='dog'/>`);
     assert
       .dom('source')
-      .hasAttribute(
-        'src',
-        'https://res.cloudinary.com/cloudinary-test/video/upload/dog'
-      );
+      .hasAttribute('src', 'https://res.cloudinary.com/demo/video/upload/dog');
   });
 });
