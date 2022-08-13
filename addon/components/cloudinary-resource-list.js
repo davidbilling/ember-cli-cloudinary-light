@@ -7,7 +7,9 @@ import { tracked } from '@glimmer/tracking';
 export default class CloudinaryResourceList extends Component {
   @tracked _items;
 
-  get items() {
+  constructor(owner, args) {
+    super(owner, args);
+
     if (this.args.cloudinaryTag) {
       this.fetchCloudinaryResourceList()
         .then(this.handleCloudinaryResponse.bind(this))
@@ -15,7 +17,9 @@ export default class CloudinaryResourceList extends Component {
           debug(`Error fetching Cloudinary Resource List: ${error}`);
         });
     }
+  }
 
+  get items() {
     return this._items;
   }
 
@@ -61,6 +65,5 @@ export default class CloudinaryResourceList extends Component {
     });
 
     this._items = response.resources;
-    return response.resources;
   }
 }
