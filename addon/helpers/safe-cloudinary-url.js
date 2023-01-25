@@ -1,7 +1,7 @@
 import Ember from 'ember'; //So far Ember.Handlebars.Utils.escapeExpression is not a Module
 import Helper from '@ember/component/helper';
 import { getOwner } from '@ember/application';
-import { htmlSafe } from '@ember/string';
+import { htmlSafe } from '@ember/template';
 import formatter from '../utils/variable-formatter';
 
 export default class safecloudinaryurl extends Helper {
