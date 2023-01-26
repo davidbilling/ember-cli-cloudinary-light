@@ -1,7 +1,7 @@
 import Ember from 'ember'; //So far Ember.Handlebars.Utils.escapeExpression is not a Module
 import Component from '@glimmer/component';
 import { getOwner } from '@ember/application';
-import { htmlSafe } from '@ember/string';
+import { htmlSafe } from '@ember/template';
 import formatter from '../utils/variable-formatter';
 
 export default class CloudinaryVideoComponent extends Component {
