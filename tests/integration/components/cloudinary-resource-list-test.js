@@ -18,7 +18,8 @@ module('Integration | Component | cloudinary-resource-list', function (hooks) {
   test('it gracefully handles fetch error', async function (assert) {
     await render(hbs`
       <CloudinaryResourceList @cloudinaryTag='test' as |resourceList|>
-        it renders block content
+        it renders block content 
+        <span>{{resourceList.public_id}}</span>
       </CloudinaryResourceList>
     `);
 
