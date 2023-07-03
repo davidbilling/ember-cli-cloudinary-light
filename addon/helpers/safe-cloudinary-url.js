@@ -1,4 +1,4 @@
-import Ember from 'ember'; //So far Ember.Handlebars.Utils.escapeExpression is not a Module
+import Ember from 'ember'; //So far Ember.Handlebars.Utils.escapeExpression is not a Module, TODO: https://www.npmjs.com/package/sanitize-html#what-if-i-want-disallowed-tags-to-be-escaped-rather-than-discarded
 import Helper from '@ember/component/helper';
 import { getOwner } from '@ember/application';
 import { htmlSafe } from '@ember/template';
