@@ -87,7 +87,7 @@ module('Integration | Component | cloudinary-resource-list', function (hooks) {
           },
           JSON.stringify(cloudinaryResourceListResponse),
         ];
-      }
+      },
     );
 
     await render(hbs`
@@ -100,15 +100,15 @@ module('Integration | Component | cloudinary-resource-list', function (hooks) {
 
     assert.ok(
       find('span').textContent.trim().endsWith('image_a'),
-      'Image A order is OK'
+      'Image A order is OK',
     );
     assert.ok(
       find('span:nth-child(2)').textContent.trim().endsWith('image_b'),
-      'Image B order is OK'
+      'Image B order is OK',
     );
     assert.ok(
       find('span:nth-child(3)').textContent.trim().endsWith('image_c'),
-      'Image C order is OK'
+      'Image C order is OK',
     );
   });
 
@@ -146,7 +146,7 @@ module('Integration | Component | cloudinary-resource-list', function (hooks) {
           },
           JSON.stringify(cloudinaryResourceListResponse),
         ];
-      }
+      },
     );
 
     await render(hbs`

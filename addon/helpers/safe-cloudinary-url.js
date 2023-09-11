@@ -8,7 +8,7 @@ export default class safecloudinaryurl extends Helper {
   compute(params, hash) {
     const cloudName = Ember.Handlebars.Utils.escapeExpression(
       getOwner(this).resolveRegistration('config:environment').cloudinary
-        .cloudName
+        .cloudName,
     );
     const publicId = Ember.Handlebars.Utils.escapeExpression(params[0]);
     const parameters = Ember.Handlebars.Utils.escapeExpression(formatter(hash));
@@ -21,7 +21,7 @@ export default class safecloudinaryurl extends Helper {
           parameters +
           '/' +
           publicId +
-          "')"
+          "')",
       );
     }
   }
