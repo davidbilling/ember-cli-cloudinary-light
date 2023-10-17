@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "@babel/core": "^7.22.19",
-    "ember-cli-babel": "^8.0.0",
+    "ember-cli-babel": "^8.1.0",
     "ember-cli-htmlbars": "^6.3.0"
   },
   "devDependencies": {
