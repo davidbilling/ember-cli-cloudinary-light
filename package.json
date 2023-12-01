@@ -33,7 +33,7 @@
     "test:ember-compatibility": "ember try:each"
   },
   "dependencies": {
-    "@babel/core": "^7.23.2",
+    "@babel/core": "^7.23.3",
     "ember-cli-babel": "^8.0.0",
     "ember-cli-htmlbars": "^6.3.0"
   },
