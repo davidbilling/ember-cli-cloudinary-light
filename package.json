@@ -33,13 +33,13 @@
     "test:ember-compatibility": "ember try:each"
   },
   "dependencies": {
-    "@babel/core": "^7.23.6",
+    "@babel/core": "^7.23.7",
     "ember-cli-babel": "^8.2.0",
     "ember-cli-htmlbars": "^6.3.0"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.23.3",
-    "@babel/plugin-proposal-decorators": "^7.23.6",
+    "@babel/plugin-proposal-decorators": "^7.23.7",
     "@ember/optional-features": "^2.0.0",
     "@ember/test-helpers": "^3.2.1",
     "@embroider/test-setup": "^3.0.3",
@@ -47,7 +47,7 @@
     "@glimmer/tracking": "^1.1.2",
     "broccoli-asset-rev": "^3.0.0",
     "concurrently": "^8.2.2",
-    "ember-auto-import": "^2.7.0",
+    "ember-auto-import": "^2.7.2",
     "ember-cli": "~5.5.0",
     "ember-cli-clean-css": "^3.0.0",
     "ember-cli-dependency-checker": "^3.3.2",
