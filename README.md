@@ -1,14 +1,12 @@
 # ember-cli-cloudinary-light
 
-Ember addon for Cloudinary without jquery. Works good for fastboot.
+[Short description of the addon.]
 
 ## Compatibility
 
-* Ember.js v4.8 or above
-* Ember CLI v4.8 or above
-* Node.js v18 or above
-
-From version 0.6.0 there is **no positional parameters**, publicId and options are arguments!
+- Ember.js v4.12 or above
+- Ember CLI v4.12 or above
+- Node.js v18 or above
 
 ## Installation
 
@@ -25,6 +23,8 @@ cloudinary: {
 ## Components ##
 
 ### cloudinary-image ###
+
+## Usage
 
 This component will render an ``<img>`` built from a cloudinary url and options.
 
@@ -67,7 +67,6 @@ This helper can be used in styles when you want to have dynamic url:s to cloudin
 ## Contributing
 
 See the [Contributing](CONTRIBUTING.md) guide for details.
-
 
 ## License
 
