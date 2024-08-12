@@ -33,7 +33,7 @@
     "test:ember-compatibility": "ember try:each"
   },
   "dependencies": {
-    "@babel/core": "^7.24.8",
+    "@babel/core": "^7.24.9",
     "ember-cli-babel": "^8.2.0",
     "ember-cli-htmlbars": "^6.3.0"
   },
@@ -59,7 +59,7 @@
     "ember-page-title": "^8.2.3",
     "ember-qunit": "^8.0.2",
     "ember-resolver": "^11.0.1",
-    "ember-source": "~5.9.0",
+    "ember-source": "~5.10.0",
     "ember-source-channel-url": "^3.0.0",
     "ember-template-lint": "^5.13.0",
     "ember-try": "^3.0.0",
