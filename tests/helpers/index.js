@@ -25,6 +25,14 @@ function setupApplicationTest(hooks, options) {
   //
   // setupIntl(hooks, 'en-us'); // ember-intl
   // setupMirage(hooks); // ember-cli-mirage
+
+  setupTest(hooks);
+
+  hooks.beforeEach(function() {
+    Ember.onerror = function(error) {
+      throw error;      
+    };
+  });  
 }
 
 function setupRenderingTest(hooks, options) {

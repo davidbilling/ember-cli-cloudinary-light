@@ -1,12 +1,27 @@
 import { module, test } from 'qunit';
-import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
-import hbs from 'htmlbars-inline-precompile';
+import { setupRenderingTest } from '../../helpers';
+import { render, validateErrorHandler } from '@ember/test-helpers';
+import { hbs } from 'ember-cli-htmlbars';
+import { 
+  squelchErrorHandlerFor,
+  unsquelchAllErrorHandlers
+} from 'ember-test-friendly-error-handler';
 
 module('Integration | Component | cloudinary image', function (hooks) {
   setupRenderingTest(hooks);
 
+  hooks.afterEach(() => {
+    unsquelchAllErrorHandlers();
+  });
+
+  test('Ember.onerror is functioning properly', function(assert) {
+    debugger;
+    let result = validateErrorHandler();
+    assert.ok(result.isValid, result.message);
+  });
+
   test('it renders image', async function (assert) {
+    squelchErrorHandlerFor('Ember.onerror');
     await render(hbs`<CloudinaryImage @publicId='test'/>`);
     assert
       .dom('img')
@@ -14,6 +29,7 @@ module('Integration | Component | cloudinary image', function (hooks) {
   });
 
   test('it renders an image with width and height options', async function (assert) {
+    squelchErrorHandlerFor('Ember.onerror');
     await render(
       hbs`<CloudinaryImage @publicId='test' @options={{hash width='100' height='100'}}/>`,
     );
@@ -29,6 +45,7 @@ module('Integration | Component | cloudinary image', function (hooks) {
   });
 
   test('it renders an image with width and height options in url and attributes', async function (assert) {
+    squelchErrorHandlerFor('Ember.onerror');
     await render(
       hbs`<CloudinaryImage @publicId='test' @options={{hash width='100' height='100' crop='fill'}}/>`,
     );
@@ -44,6 +61,7 @@ module('Integration | Component | cloudinary image', function (hooks) {
   });
 
   test('it renders an image WHITOUT width and height options attributes for crop= limit', async function (assert) {
+    squelchErrorHandlerFor('Ember.onerror');
     await render(
       hbs`<CloudinaryImage @publicId='test' @options={{hash height='100' crop='limit'}}/>`,
     );
@@ -58,6 +76,7 @@ module('Integration | Component | cloudinary image', function (hooks) {
     assert.dom('img').doesNotHaveAttribute('height');
   });
   test('it renders an image WHITOUT width and height options attributes for crop= lfill', async function (assert) {
+    squelchErrorHandlerFor('Ember.onerror');
     await render(
       hbs`<CloudinaryImage @publicId='test' @options={{hash height='100' crop='lfill'}}/>`,
     );
@@ -72,6 +91,7 @@ module('Integration | Component | cloudinary image', function (hooks) {
     assert.dom('img').doesNotHaveAttribute('height');
   });
   test('it renders an image WHITOUT width and height options attributes for crop= fit', async function (assert) {
+    squelchErrorHandlerFor('Ember.onerror');
     await render(
       hbs`<CloudinaryImage @publicId='test' @options={{hash width='100' height='100' crop='fit'}}/>`,
     );

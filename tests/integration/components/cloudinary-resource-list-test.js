@@ -1,8 +1,12 @@
 import { module, test } from 'qunit';
-import { setupRenderingTest } from 'ember-qunit';
+import { setupRenderingTest } from '../../helpers';
 import { render, find } from '@ember/test-helpers';
-import hbs from 'htmlbars-inline-precompile';
+import { hbs } from 'ember-cli-htmlbars';
 import Pretender from 'pretender';
+import { 
+  squelchErrorHandlerFor,
+  unsquelchAllErrorHandlers
+} from 'ember-test-friendly-error-handler';
 
 module('Integration | Component | cloudinary-resource-list', function (hooks) {
   setupRenderingTest(hooks);
@@ -12,6 +16,7 @@ module('Integration | Component | cloudinary-resource-list', function (hooks) {
   });
 
   hooks.afterEach(function () {
+    unsquelchAllErrorHandlers();
     this.server.shutdown();
   });
 
@@ -27,6 +32,7 @@ module('Integration | Component | cloudinary-resource-list', function (hooks) {
   });
 
   test('it renders cloudinary response in correct order', async function (assert) {
+    squelchErrorHandlerFor('Ember.onerror');
     this.server.get(
       'https://res.cloudinary.com/demo/image/list/test.json',
       () => {
@@ -113,6 +119,7 @@ module('Integration | Component | cloudinary-resource-list', function (hooks) {
   });
 
   test('it fetches images without custom context', async function (assert) {
+    squelchErrorHandlerFor('Ember.onerror');
     this.server.get(
       'https://res.cloudinary.com/demo/image/list/test.json',
       () => {
