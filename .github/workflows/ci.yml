@@ -43,7 +43,7 @@ jobs:
           node-version: 18
           cache: npm
       - name: Install Dependencies
-        run: npm install --no-shrinkwrap
+        run: npm install --no-shrinkwrap --force
       - name: Run Tests
         run: npm run test:ember
 
