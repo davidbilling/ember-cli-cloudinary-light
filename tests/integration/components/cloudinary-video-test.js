@@ -2,9 +2,9 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from '../../helpers';
 import { render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
-import { 
+import {
   squelchErrorHandlerFor,
-  unsquelchAllErrorHandlers
+  unsquelchAllErrorHandlers,
 } from 'ember-test-friendly-error-handler';
 
 module('Integration | Component | cloudinary video', function (hooks) {

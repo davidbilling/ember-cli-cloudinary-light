@@ -12,11 +12,10 @@ export default class App extends Application {
 }
 
 Ember.onerror = buildErrorHandler('Ember.onerror', (reason) => {
-  debugger;
   throw reason;
   // reportErrorToService(reason);
-  
-    // whatever else you might want here...
+
+  // whatever else you might want here...
 });
 
 loadInitializers(App, config.modulePrefix);

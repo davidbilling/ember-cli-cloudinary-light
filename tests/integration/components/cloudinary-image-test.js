@@ -2,9 +2,9 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from '../../helpers';
 import { render, validateErrorHandler } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
-import { 
+import {
   squelchErrorHandlerFor,
-  unsquelchAllErrorHandlers
+  unsquelchAllErrorHandlers,
 } from 'ember-test-friendly-error-handler';
 
 module('Integration | Component | cloudinary image', function (hooks) {
@@ -14,8 +14,7 @@ module('Integration | Component | cloudinary image', function (hooks) {
     unsquelchAllErrorHandlers();
   });
 
-  test('Ember.onerror is functioning properly', function(assert) {
-    debugger;
+  test('Ember.onerror is functioning properly', function (assert) {
     let result = validateErrorHandler();
     assert.ok(result.isValid, result.message);
   });

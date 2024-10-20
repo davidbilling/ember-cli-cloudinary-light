@@ -9,4 +9,4 @@ setApplication(Application.create(config.APP));
 
 setup(QUnit.assert);
 
-start({ setupEmberOnerrorValidation : false });
+start({ setupEmberOnerrorValidation: false });

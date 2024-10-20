@@ -3,9 +3,9 @@ import { setupRenderingTest } from '../../helpers';
 import { render, find } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import Pretender from 'pretender';
-import { 
+import {
   squelchErrorHandlerFor,
-  unsquelchAllErrorHandlers
+  unsquelchAllErrorHandlers,
 } from 'ember-test-friendly-error-handler';
 
 module('Integration | Component | cloudinary-resource-list', function (hooks) {

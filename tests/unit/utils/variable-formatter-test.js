@@ -1,12 +1,11 @@
 import variableFormatter from 'dummy/utils/variable-formatter';
 import { module, test } from 'qunit';
-import { 
+import {
   squelchErrorHandlerFor,
-  unsquelchAllErrorHandlers
+  unsquelchAllErrorHandlers,
 } from 'ember-test-friendly-error-handler';
 
 module('Unit | Utility | variable formatter', function (hooks) {
-
   hooks.afterEach(() => {
     unsquelchAllErrorHandlers();
   });
