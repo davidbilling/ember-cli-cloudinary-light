@@ -43,7 +43,7 @@ jobs:
           node-version: 18
           cache: npm
       - name: Install Dependencies
-        run: npm install --no-shrinkwrap
+        run: npm install --no-shrinkwrap --force
       - name: Run Tests
         run: npm run test:ember
 
@@ -63,7 +63,7 @@ jobs:
           - ember-beta
           - ember-canary
           - embroider-safe
-          # - embroider-optimized
+          - embroider-optimized
 
     steps:
       - uses: actions/checkout@v3
