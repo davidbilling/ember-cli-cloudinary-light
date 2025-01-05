@@ -1,6 +1,6 @@
 {
   "name": "ember-cli-cloudinary-light",
-  "version": "0.12.2",
+  "version": "0.12.3",
   "description": "Ember addon for Cloudinary without jquery",
   "keywords": [
     "ember-addon",
@@ -87,7 +87,7 @@
   "overrides": {
     "braces": "3.0.3",
     "lodash": "^4.17.21"
-  },  
+  },
   "peerDependencies": {
     "ember-source": ">= 4.0.0"
   },
