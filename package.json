@@ -84,11 +84,15 @@
     "qunit-dom": "^3.4.0",
     "stylelint": "^16.19.1",
     "stylelint-config-standard": "^36.0.1",
-    "webpack": "^5.99.7"
+    "webpack": "^5.99.8"
   },
   "overrides": {
-    "braces": "3.0.3",
-    "lodash": "^4.17.21"
+    "braces": "^3.0.3",
+    "lodash": "^4.17.21",
+    "@babel/runtime": "^7.26.10",
+    "got": "^11.8.5",
+    "lodash.template": "^4.5.0",
+    "rollup": "^2.79.2"
   },
   "peerDependencies": {
     "ember-source": ">= 4.0.0"
