@@ -1,11 +1,10 @@
 import Component from '@glimmer/component';
 import { getOwner } from '@ember/application';
-import fetch from 'fetch';
 import { debug } from '@ember/debug';
 import { tracked } from '@glimmer/tracking';
 
 export default class CloudinaryResourceList extends Component {
-  @tracked _items;
+  @tracked _items = [];
 
   constructor(owner, args) {
     super(owner, args);
@@ -39,9 +38,14 @@ export default class CloudinaryResourceList extends Component {
   }
 
   handleCloudinaryResponse(response) {
+    if (!response || !response.resources) {
+      debug('Invalid response from Cloudinary');
+      return;
+    }
+    
     response.resources.sort((a, b) => {
       if (!a.context || !a.context.custom || !b.context || !b.context.custom) {
-        return;
+        return 0;
       }
 
       let {

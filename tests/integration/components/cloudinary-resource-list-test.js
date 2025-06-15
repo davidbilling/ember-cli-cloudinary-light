@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from '../../helpers';
-import { render, find } from '@ember/test-helpers';
+import { render, find, settled } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import Pretender from 'pretender';
 import {
@@ -13,11 +13,17 @@ module('Integration | Component | cloudinary-resource-list', function (hooks) {
 
   hooks.beforeEach(function () {
     this.server = new Pretender();
+    // Store original fetch
+    this.originalFetch = window.fetch;
   });
 
   hooks.afterEach(function () {
     unsquelchAllErrorHandlers();
     this.server.shutdown();
+    // Restore original fetch
+    if (this.originalFetch) {
+      window.fetch = this.originalFetch;
+    }
   });
 
   test('it gracefully handles fetch error', async function (assert) {
@@ -33,9 +39,11 @@ module('Integration | Component | cloudinary-resource-list', function (hooks) {
 
   test('it renders cloudinary response in correct order', async function (assert) {
     squelchErrorHandlerFor('Ember.onerror');
-    this.server.get(
-      'https://res.cloudinary.com/demo/image/list/test.json',
-      () => {
+    
+    // Mock fetch directly
+    window.fetch = (url) => {
+      assert.step(`fetch called with: ${url}`);
+      if (url === 'https://res.cloudinary.com/demo/image/list/test.json') {
         let cloudinaryResourceListResponse = {
           resources: [
             {
@@ -86,43 +94,67 @@ module('Integration | Component | cloudinary-resource-list', function (hooks) {
           ],
           updated_at: '2017-11-03T13:16:29Z',
         };
-        return [
-          200,
-          {
-            'Content-Type': 'application/json',
-          },
-          JSON.stringify(cloudinaryResourceListResponse),
-        ];
-      },
-    );
+        return Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve(cloudinaryResourceListResponse)
+        });
+      }
+      return Promise.reject(new Error('Unexpected URL'));
+    };
 
     await render(hbs`
       <CloudinaryResourceList @cloudinaryTag='test' as |resourceList|>
+        <div class="debug">Items: {{resourceList.items.length}}</div>
         {{#each resourceList.items as |item|}}
           <span>{{item.public_id}}</span>
         {{/each}}
       </CloudinaryResourceList>
     `);
+    
+    await settled();
+    
+    assert.verifySteps(['fetch called with: https://res.cloudinary.com/demo/image/list/test.json']);
 
-    assert.ok(
-      find('span').textContent.trim().endsWith('image_a'),
-      'Image A order is OK',
-    );
-    assert.ok(
-      find('span:nth-child(2)').textContent.trim().endsWith('image_b'),
-      'Image B order is OK',
-    );
-    assert.ok(
-      find('span:nth-child(3)').textContent.trim().endsWith('image_c'),
-      'Image C order is OK',
-    );
+    const debugText = find('.debug').textContent;
+    assert.ok(debugText.includes('3'), `Should have 3 items, got: ${debugText}`);
+
+    const firstSpan = find('span');
+    assert.ok(firstSpan, 'First span should exist');
+    
+    if (firstSpan) {
+      assert.ok(
+        firstSpan.textContent.trim().endsWith('image_a'),
+        `Image A order is OK, got: ${firstSpan.textContent.trim()}`,
+      );
+    }
+    
+    const secondSpan = find('.debug + span + span');
+    if (secondSpan) {
+      assert.ok(
+        secondSpan.textContent.trim().endsWith('image_b'),
+        `Image B order is OK, got: ${secondSpan.textContent.trim()}`,
+      );
+    } else {
+      assert.ok(false, 'Second span not found');
+    }
+    
+    const thirdSpan = find('.debug + span + span + span');
+    if (thirdSpan) {
+      assert.ok(
+        thirdSpan.textContent.trim().endsWith('image_c'),
+        `Image C order is OK, got: ${thirdSpan.textContent.trim()}`,
+      );
+    } else {
+      assert.ok(false, 'Third span not found');
+    }
   });
 
   test('it fetches images without custom context', async function (assert) {
     squelchErrorHandlerFor('Ember.onerror');
-    this.server.get(
-      'https://res.cloudinary.com/demo/image/list/test.json',
-      () => {
+    
+    // Mock fetch directly
+    window.fetch = (url) => {
+      if (url === 'https://res.cloudinary.com/demo/image/list/test.json') {
         let cloudinaryResourceListResponse = {
           resources: [
             {
@@ -146,15 +178,13 @@ module('Integration | Component | cloudinary-resource-list', function (hooks) {
           ],
           updated_at: '2018-09-19T15:56:04Z',
         };
-        return [
-          200,
-          {
-            'Content-Type': 'application/json',
-          },
-          JSON.stringify(cloudinaryResourceListResponse),
-        ];
-      },
-    );
+        return Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve(cloudinaryResourceListResponse)
+        });
+      }
+      return Promise.reject(new Error('Unexpected URL'));
+    };
 
     await render(hbs`
       <CloudinaryResourceList @cloudinaryTag='test' as |resourceList|>
@@ -163,6 +193,8 @@ module('Integration | Component | cloudinary-resource-list', function (hooks) {
         {{/each}}
       </CloudinaryResourceList>
     `);
+    
+    await settled();
 
     assert.dom('#image_a').exists('image_a exists');
     assert.dom('#image_b').exists('image_b exists');

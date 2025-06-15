@@ -60,7 +60,6 @@
     "ember-cli-inject-live-reload": "^2.1.0",
     "ember-cli-sri": "^2.1.1",
     "ember-cli-terser": "^4.0.2",
-    "ember-fetch": "^8.1.2",
     "ember-load-initializers": "^3.0.1",
     "ember-page-title": "^9.0.2",
     "ember-qunit": "^9.0.3",
@@ -92,7 +91,8 @@
     "@babel/runtime": "^7.26.10",
     "got": "^11.8.5",
     "lodash.template": "^4.5.0",
-    "rollup": "^2.79.2"
+    "rollup": "^2.79.2",
+    "broccoli-rollup": "^5.0.0"
   },
   "peerDependencies": {
     "ember-source": ">= 4.0.0"
