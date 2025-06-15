@@ -42,7 +42,7 @@ export default class CloudinaryResourceList extends Component {
       debug('Invalid response from Cloudinary');
       return;
     }
-    
+
     response.resources.sort((a, b) => {
       if (!a.context || !a.context.custom || !b.context || !b.context.custom) {
         return 0;

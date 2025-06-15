@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from '../../helpers';
-import { render, find, settled } from '@ember/test-helpers';
+import { render, find } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import Pretender from 'pretender';
 import {
@@ -39,7 +39,7 @@ module('Integration | Component | cloudinary-resource-list', function (hooks) {
 
   test('it renders cloudinary response in correct order', async function (assert) {
     squelchErrorHandlerFor('Ember.onerror');
-    
+
     // Mock fetch directly
     window.fetch = (url) => {
       assert.step(`fetch called with: ${url}`);
@@ -96,7 +96,7 @@ module('Integration | Component | cloudinary-resource-list', function (hooks) {
         };
         return Promise.resolve({
           ok: true,
-          json: () => Promise.resolve(cloudinaryResourceListResponse)
+          json: () => Promise.resolve(cloudinaryResourceListResponse),
         });
       }
       return Promise.reject(new Error('Unexpected URL'));
@@ -110,24 +110,27 @@ module('Integration | Component | cloudinary-resource-list', function (hooks) {
         {{/each}}
       </CloudinaryResourceList>
     `);
-    
-    await settled();
-    
-    assert.verifySteps(['fetch called with: https://res.cloudinary.com/demo/image/list/test.json']);
+
+    assert.verifySteps([
+      'fetch called with: https://res.cloudinary.com/demo/image/list/test.json',
+    ]);
 
     const debugText = find('.debug').textContent;
-    assert.ok(debugText.includes('3'), `Should have 3 items, got: ${debugText}`);
+    assert.ok(
+      debugText.includes('3'),
+      `Should have 3 items, got: ${debugText}`,
+    );
 
     const firstSpan = find('span');
     assert.ok(firstSpan, 'First span should exist');
-    
+
     if (firstSpan) {
       assert.ok(
         firstSpan.textContent.trim().endsWith('image_a'),
         `Image A order is OK, got: ${firstSpan.textContent.trim()}`,
       );
     }
-    
+
     const secondSpan = find('.debug + span + span');
     if (secondSpan) {
       assert.ok(
@@ -137,7 +140,7 @@ module('Integration | Component | cloudinary-resource-list', function (hooks) {
     } else {
       assert.ok(false, 'Second span not found');
     }
-    
+
     const thirdSpan = find('.debug + span + span + span');
     if (thirdSpan) {
       assert.ok(
@@ -151,7 +154,7 @@ module('Integration | Component | cloudinary-resource-list', function (hooks) {
 
   test('it fetches images without custom context', async function (assert) {
     squelchErrorHandlerFor('Ember.onerror');
-    
+
     // Mock fetch directly
     window.fetch = (url) => {
       if (url === 'https://res.cloudinary.com/demo/image/list/test.json') {
@@ -180,7 +183,7 @@ module('Integration | Component | cloudinary-resource-list', function (hooks) {
         };
         return Promise.resolve({
           ok: true,
-          json: () => Promise.resolve(cloudinaryResourceListResponse)
+          json: () => Promise.resolve(cloudinaryResourceListResponse),
         });
       }
       return Promise.reject(new Error('Unexpected URL'));
@@ -193,8 +196,6 @@ module('Integration | Component | cloudinary-resource-list', function (hooks) {
         {{/each}}
       </CloudinaryResourceList>
     `);
-    
-    await settled();
 
     assert.dom('#image_a').exists('image_a exists');
     assert.dom('#image_b').exists('image_b exists');
