@@ -1,8 +1,8 @@
-import Ember from 'ember'; //So far Ember.Handlebars.Utils.escapeExpression is not a Module
 import Component from '@glimmer/component';
 import { getOwner } from '@ember/application';
 import { htmlSafe } from '@ember/template';
 import formatter from '../utils/variable-formatter';
+import escapeHtml from '../utils/escape-html';
 import { tracked } from '@glimmer/tracking';
 
 export default class CloudinaryImageComponent extends Component {
@@ -46,16 +46,12 @@ export default class CloudinaryImageComponent extends Component {
   }
 
   get src() {
-    const cloudName = Ember.Handlebars.Utils.escapeExpression(
+    const cloudName = escapeHtml(
       getOwner(this).resolveRegistration('config:environment').cloudinary
         .cloudName,
     );
-    const params = Ember.Handlebars.Utils.escapeExpression(
-      formatter(this.args.options),
-    );
-    const publicId = Ember.Handlebars.Utils.escapeExpression(
-      this.args.publicId,
-    );
+    const params = escapeHtml(formatter(this.args.options));
+    const publicId = escapeHtml(this.args.publicId);
 
     const image = `https://res.cloudinary.com/${cloudName}/image/upload${params}/${publicId}`;
     return htmlSafe(image);

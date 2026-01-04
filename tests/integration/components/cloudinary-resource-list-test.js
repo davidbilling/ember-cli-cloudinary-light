@@ -123,33 +123,24 @@ module('Integration | Component | cloudinary-resource-list', function (hooks) {
 
     const firstSpan = find('span');
     assert.ok(firstSpan, 'First span should exist');
-
-    if (firstSpan) {
-      assert.ok(
-        firstSpan.textContent.trim().endsWith('image_a'),
-        `Image A order is OK, got: ${firstSpan.textContent.trim()}`,
-      );
-    }
+    assert.ok(
+      firstSpan.textContent.trim().endsWith('image_a'),
+      `Image A order is OK, got: ${firstSpan.textContent.trim()}`,
+    );
 
     const secondSpan = find('.debug + span + span');
-    if (secondSpan) {
-      assert.ok(
-        secondSpan.textContent.trim().endsWith('image_b'),
-        `Image B order is OK, got: ${secondSpan.textContent.trim()}`,
-      );
-    } else {
-      assert.ok(false, 'Second span not found');
-    }
+    assert.ok(secondSpan, 'Second span should exist');
+    assert.ok(
+      secondSpan.textContent.trim().endsWith('image_b'),
+      `Image B order is OK, got: ${secondSpan.textContent.trim()}`,
+    );
 
     const thirdSpan = find('.debug + span + span + span');
-    if (thirdSpan) {
-      assert.ok(
-        thirdSpan.textContent.trim().endsWith('image_c'),
-        `Image C order is OK, got: ${thirdSpan.textContent.trim()}`,
-      );
-    } else {
-      assert.ok(false, 'Third span not found');
-    }
+    assert.ok(thirdSpan, 'Third span should exist');
+    assert.ok(
+      thirdSpan.textContent.trim().endsWith('image_c'),
+      `Image C order is OK, got: ${thirdSpan.textContent.trim()}`,
+    );
   });
 
   test('it fetches images without custom context', async function (assert) {
