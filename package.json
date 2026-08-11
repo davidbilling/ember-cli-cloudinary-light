@@ -93,7 +93,8 @@
     "got": "^11.8.5",
     "lodash.template": "^4.5.0",
     "rollup": "^2.79.2",
-    "broccoli-rollup": "^5.0.0"
+    "broccoli-rollup": "^5.0.0",
+    "tmp": "0.2.7"
   },
   "peerDependencies": {
     "ember-source": ">= 4.0.0"
